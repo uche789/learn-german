@@ -1,0 +1,41 @@
+.card {
+    background: white;
+    height: 400px;
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #acacac;
+}
+
+.card-heading {
+    position: relative;
+    font-size: 13px;
+    color: #acacac;
+    text-align: center;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.card-lang {
+    position: absolute;
+    right: 0;
+    background-color: #4da5ff;
+    height: 40px;
+    width: 40px;
+    font-size: 16px;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-content {
+    color: black;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 90%;
+}

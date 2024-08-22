@@ -1,5 +1,6 @@
 import React from 'react';
 import './switcher.css';
+import AppButton from '../base-components/button/app-button';
 
 interface SwitcherProps {
   onSwitch(): void;
@@ -8,7 +9,7 @@ interface SwitcherProps {
 const Switcher: React.FC<SwitcherProps> = ({ onSwitch }) => {
   return (
     <div className="switcher">
-      <button className="switcher-button" onClick={onSwitch}>Next word</button>
+      <AppButton onClick={onSwitch}>Next word</AppButton>
     </div>
   );
 }

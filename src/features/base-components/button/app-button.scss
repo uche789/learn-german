@@ -1,0 +1,40 @@
+@mixin hover($bgColor) {
+    &:hover {
+        background-color: $bgColor;
+    }
+}
+
+.btn {
+    color: white;
+    text-transform: uppercase;
+    min-height: 45px;
+    border-radius: 10px;
+    font-weight: 600;
+
+    &--primary {
+        background-color: #ED5380;
+        color: white;
+        @include hover(#BD4568);
+    }
+
+    &--wrong {
+        background-color: #E30948;
+    }
+
+    &--correct {
+        background-color: #48C746;
+    }
+
+    &--secondary {
+        background-color: transparent;
+        border: 2px solid #D9D9D9;
+        color: #71717A;
+        @include hover(#D9D9D9);
+    }
+
+    &:disabled {
+        background-color: #EDEDED;
+        color: #BDBDBD;
+        cursor: not-allowed;
+    }
+}

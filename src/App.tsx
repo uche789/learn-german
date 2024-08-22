@@ -3,6 +3,7 @@ import './App.css';
 import dictionary from './english-german.json';
 import Card from './features/card/Card';
 import Switcher from './features/switcher/Switcher';
+import DropDownMenu from './features/base-components/dropdown/dropdown';
 
 export type Word = {
   english: string,
@@ -32,12 +33,16 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="container">
-      <div className="wrapper">
-        <Card word={word}/>
-        <Switcher onSwitch={onSwitch}/>
-      </div>
-    </div>
+    <>
+      <header className='fixed w-full min-h-16'>STUDY MORE</header>
+      <main className="container">
+        <div className="wrapper">
+          <Card word={word}/>
+          <Switcher onSwitch={onSwitch}/>
+          <DropDownMenu />
+        </div>
+      </main>
+    </>
   );
 }
 

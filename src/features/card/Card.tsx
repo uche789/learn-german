@@ -41,7 +41,6 @@ const Card: React.FC<CardProps> = ({ word }) => {
         </div>
       }
     </>
-    
   );
 }
 

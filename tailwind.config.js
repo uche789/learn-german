@@ -3,10 +3,14 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx,tsx,ts}"],
   theme: {
     content: ["./src/**/*.{html,js,jsx,tsx,ts}"],
-    colors: {
-      "pink-600": '#BD4568',
+    extend: {
+      colors: {
+        "pink-main": "#ED5380",
+        "pink-medium": '#BD4568',
+        "pink-light": "#FFE3EB",
+        "grey-light": "#EDEDED"
+      }
     }
   },
   plugins: [],
 }
-

@@ -8,11 +8,11 @@
     color: white;
     text-transform: uppercase;
     min-height: 45px;
-    border-radius: 10px;
+    @apply rounded-xl;
     font-weight: 600;
 
     &--primary {
-        background-color: #ED5380;
+        @apply bg-pink-main;
         color: white;
         @include hover(#BD4568);
     }
@@ -33,7 +33,7 @@
     }
 
     &:disabled {
-        background-color: #EDEDED;
+        @apply bg-grey-light;
         color: #BDBDBD;
         cursor: not-allowed;
     }

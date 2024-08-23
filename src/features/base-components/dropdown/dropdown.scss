@@ -19,32 +19,37 @@
     top: 100%;
     left: 0;
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
+    @apply rounded-xl;
     border: 1px solid #eee;
     display: none;
 
     ::before {
         content: '';
         position: absolute;
-        top: -20px;
-        left: 10px;
-        border: 10px solid transparent;
+        top: -2rem;
+        left: 1rem;
+        border: 1rem solid transparent;
         border-bottom-color: #eee;
     }
 }
 
 .dropdown-link {
-    padding: 10px 0;
+    padding: 1rem 0;
 }
 
 .dropdown-menu-item {
     button{
-        padding: 10px 16px;
+        padding: 1rem 1.6rem;
+        @apply w-full text-left;
+    }
+    
+    &--selected {
+        @apply bg-pink-light;
     }
 
     button:hover {
-        overflow: hidden;
-        background-color: #eee;
+        // overflow: hidden;
+        @apply bg-grey-light;
     }
 
     &:last-child {

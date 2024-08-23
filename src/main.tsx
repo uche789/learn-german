@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './main.css';
 import { createRoot, Container } from 'react-dom/client';
 import {
   createBrowserRouter,

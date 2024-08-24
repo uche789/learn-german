@@ -9,11 +9,16 @@ const svgIcon = ({ name }: { name: string }) => {
 
   if (!Icon) return null;
 
-  return <>
+  return <div
+    aria-label={name}
+    role="image"
+    className="inline-flex items-center justify-items-center"
+    data-testid={'svg-icon-' + name}
+  >
     <Suspense fallback={null}>
       <Icon />
     </Suspense>
-  </>
+  </div>
 }
 
 export default svgIcon;

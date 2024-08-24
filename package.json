@@ -13,6 +13,7 @@
     "@types/node": "^22.5.0",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
+    "jest": "^29.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
@@ -24,7 +25,7 @@
     "start": "vite",
     "build": "vitest build",
     "serve": "vite preview",
-    "test": "vitest watch"
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
@@ -45,14 +46,19 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-typescript": "^7.24.7",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "babel-jest": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.41",
     "sass": "^1.77.8",
     "tailwindcss": "^3.4.10",
+    "ts-jest": "^29.2.5",
     "vite": "^5.4.2",
     "vite-plugin-pwa": "^0.20.1",
-    "vite-plugin-svgr": "^4.2.0",
-    "vitest": "^2.0.5"
+    "vite-plugin-svgr": "^4.2.0"
   }
 }

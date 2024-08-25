@@ -1,4 +1,8 @@
+// https://prototyp.digital/blog/multi-language-routing-in-react
 import App from '@/App';
+import ErrorPage from '@/pages/error-page';
+import Practice from '@/pages/practice';
+import Learn from '@/pages/learn';
 
 import {
   createBrowserRouter,
@@ -10,10 +14,17 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/practice",
-    element: <div>About</div>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/:lang/practice",
+        element: <Practice />,
+      },
+      {
+        path: "/:lang/learn",
+        element: <Learn />,
+      }
+    ]
   },
 ]);
 

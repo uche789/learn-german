@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import SvgIcon from './svg-icon';
+import { IconType } from '@/types';
 
-test('renders learn react link', async () => {
-  render(<SvgIcon name="french" />);
-  const svgElement = await screen.findByTestId('svg-icon-french');
+test('renders french svg icon', async () => {
+  render(<SvgIcon name={IconType.French} />);
+  const svgElement = await screen.findByTestId('svg-icon-French');
   expect(svgElement).toBeInTheDocument();
 });

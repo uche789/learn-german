@@ -1,55 +1,43 @@
-export enum LanguageLevel {
-    Beginner = 'Beginner',
-    UpperBeginner = 'UpperBeginner',
-    Intermediary = 'Intermediary',
-    UpperIntermediary = 'UpperIntermediary',
-    Advanced = "Advanced",
-    Fluent = "Fluent"
-}
+import { LanguageProficienyLevel, LevelLanguage } from "@/types";
 
-export enum AppLanguage {
-    Japanese = 'Japanese',
-    European = 'European'
-}
+type LanguageLevelMatch = Record<LanguageProficienyLevel, string>;
 
-type LanguageLevelMatch = Record<LanguageLevel, string>;
-
-type LevelType = Record<AppLanguage, LanguageLevelMatch>;
+type LevelType = Record<LevelLanguage, LanguageLevelMatch>;
 
 export const languageLevelDefinition: LevelType = {
-    [AppLanguage.Japanese]: {
-        [LanguageLevel.Beginner]: "N5",
-        [LanguageLevel.UpperBeginner]: "N4",
-        [LanguageLevel.Intermediary]: "N3",
-        [LanguageLevel.UpperIntermediary]: "N2",
-        [LanguageLevel.Advanced]: "N1",
-        [LanguageLevel.Fluent]: "N1"
+    [LevelLanguage.Japanese]: {
+        [LanguageProficienyLevel.Beginner]: "N5",
+        [LanguageProficienyLevel.UpperBeginner]: "N4",
+        [LanguageProficienyLevel.Intermediary]: "N3",
+        [LanguageProficienyLevel.UpperIntermediary]: "N2",
+        [LanguageProficienyLevel.Advanced]: "N1",
+        [LanguageProficienyLevel.Fluent]: "N1"
     },
-    [AppLanguage.European]: {
-        [LanguageLevel.Beginner]: "A1",
-        [LanguageLevel.UpperBeginner]: "A2",
-        [LanguageLevel.Intermediary]: "B1",
-        [LanguageLevel.UpperIntermediary]: "B2",
-        [LanguageLevel.Advanced]: "C1",
-        [LanguageLevel.Fluent]: "C2"
+    [LevelLanguage.European]: {
+        [LanguageProficienyLevel.Beginner]: "A1",
+        [LanguageProficienyLevel.UpperBeginner]: "A2",
+        [LanguageProficienyLevel.Intermediary]: "B1",
+        [LanguageProficienyLevel.UpperIntermediary]: "B2",
+        [LanguageProficienyLevel.Advanced]: "C1",
+        [LanguageProficienyLevel.Fluent]: "C2"
     },
 }
 
 export const LanguageLevelColour: LevelType = {
-    [AppLanguage.Japanese]: {
-        [LanguageLevel.Beginner]: "bg-red-300",
-        [LanguageLevel.UpperBeginner]: "bg-red-500",
-        [LanguageLevel.Intermediary]: "bg-amber-300",
-        [LanguageLevel.UpperIntermediary]: "bg-amber-500",
-        [LanguageLevel.Advanced]: "bg-green-300",
-        [LanguageLevel.Fluent]: "bg-green-300"
+    [LevelLanguage.Japanese]: {
+        [LanguageProficienyLevel.Beginner]: "bg-red-300",
+        [LanguageProficienyLevel.UpperBeginner]: "bg-red-500",
+        [LanguageProficienyLevel.Intermediary]: "bg-amber-300",
+        [LanguageProficienyLevel.UpperIntermediary]: "bg-amber-500",
+        [LanguageProficienyLevel.Advanced]: "bg-green-300",
+        [LanguageProficienyLevel.Fluent]: "bg-green-300"
     },
-    [AppLanguage.European]: {
-        [LanguageLevel.Beginner]: "bg-red-300",
-        [LanguageLevel.UpperBeginner]: "bg-red-500",
-        [LanguageLevel.Intermediary]: "bg-amber-300",
-        [LanguageLevel.UpperIntermediary]: "bg-amber-500",
-        [LanguageLevel.Advanced]: "bg-green-300",
-        [LanguageLevel.Fluent]: "bg-green-500"
+    [LevelLanguage.European]: {
+        [LanguageProficienyLevel.Beginner]: "bg-red-300",
+        [LanguageProficienyLevel.UpperBeginner]: "bg-red-500",
+        [LanguageProficienyLevel.Intermediary]: "bg-amber-300",
+        [LanguageProficienyLevel.UpperIntermediary]: "bg-amber-500",
+        [LanguageProficienyLevel.Advanced]: "bg-green-300",
+        [LanguageProficienyLevel.Fluent]: "bg-green-500"
     },
 }

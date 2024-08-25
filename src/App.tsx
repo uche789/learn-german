@@ -4,6 +4,11 @@ import dictionary from '@/assets/english-german.json';
 import Card from './features/card/Card';
 import Switcher from './features/switcher/Switcher';
 import DropDownMenu from './features/base-components/dropdown/dropdown';
+import SelectItem from '@/features/base-components/select-item/select-item';
+import { IconType } from './types';
+import AppHeader from './features/app-header/app-header';
+import AppNav from './features/app-nav/app-nav';
+import { Outlet } from 'react-router-dom';
 
 export type Word = {
   english: string,
@@ -39,8 +44,10 @@ const App: React.FC = () => {
 
   return (
     <>
-      <header className='fixed w-full min-h-16'>STUDY MORE</header>
-      <main className="container">
+      <AppHeader />
+      <main className="max-w-screen-lg w-full px-4 m-auto pt-24">
+        <AppNav />
+        <Outlet />
         <div className="wrapper">
           <Card word={word}/>
           <Switcher onSwitch={onSwitch}/>
@@ -50,6 +57,7 @@ const App: React.FC = () => {
             linkName='Hover me'
             selected="first"
           />
+          <SelectItem label='C1 level' icon={IconType.French} isBolded={true} onClick={() => {}} />
         </div>
       </main>
     </>

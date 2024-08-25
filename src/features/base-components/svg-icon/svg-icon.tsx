@@ -2,9 +2,11 @@
 
 import { Suspense, lazy as _lazy, useMemo } from "react";
 import icons from "./icons";
+import { IconType } from "@/types";
+import './svg-icon.scss'
 
 
-const svgIcon = ({ name }: { name: string }) => {
+const svgIcon = ({ name }: { name: IconType }) => {
   const Icon = useMemo(() => icons[name], [name]);
 
   if (!Icon) return null;
@@ -12,7 +14,7 @@ const svgIcon = ({ name }: { name: string }) => {
   return <div
     aria-label={name}
     role="image"
-    className="inline-flex items-center justify-items-center"
+    className="svg-icon inline-flex items-center justify-items-center h-8"
     data-testid={'svg-icon-' + name}
   >
     <Suspense fallback={null}>

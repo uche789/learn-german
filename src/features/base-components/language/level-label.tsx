@@ -1,9 +1,10 @@
 import { FC } from "react"
-import { AppLanguage, LanguageLevel, LanguageLevelColour, languageLevelDefinition } from "./data";
+import { LanguageLevelColour, languageLevelDefinition } from "./data";
+import { LanguageProficienyLevel, LevelLanguage } from "@/types";
 
 type NavItem = {
-  level: LanguageLevel;
-  language: AppLanguage
+  level: LanguageProficienyLevel;
+  language: LevelLanguage
 }
 
 const navItem: FC<NavItem> = ({ level, language }) => {

@@ -1,6 +1,6 @@
-import React from 'react';
-import './switcher.css';
-import AppButton from '../base-components/button/app-button';
+import React from "react";
+import "./switcher.css";
+import AppButton from "../../components/button/app-button";
 
 interface SwitcherProps {
   onSwitch(): void;
@@ -12,6 +12,6 @@ const Switcher: React.FC<SwitcherProps> = ({ onSwitch }) => {
       <AppButton onClick={onSwitch}>Next word</AppButton>
     </div>
   );
-}
+};
 
 export default Switcher;

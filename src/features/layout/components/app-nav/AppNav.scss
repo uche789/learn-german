@@ -1,0 +1,11 @@
+nav {
+  display: flex;
+  justify-content: center;
+
+  & > * {
+    min-width: 4.8rem;
+    &:not(:last-child) {
+      @apply mr-2;
+    }
+  }
+}

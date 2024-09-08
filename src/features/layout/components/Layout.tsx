@@ -2,7 +2,7 @@ import { Word } from "@/App";
 import SelectItem from "@/components/select-item/SelectItem";
 import Card from "@/features/card/Card";
 import Switcher from "@/features/switcher/Switcher";
-import { IconType } from "@/types";
+import { IconType, SupportedLanguages } from "@/types";
 import React, { useContext, useEffect } from "react";
 import { Outlet, Navigate, useParams } from "react-router-dom";
 import AppHeader from "./app-header/AppHeader";
@@ -17,9 +17,9 @@ export default function Layout() {
   useEffect(() => {
     dispatch({
       type: GlobalActionType.SetLang,
-      payload: { value: params?.lang || "de" },
+      payload: { value: params?.lang as SupportedLanguages || "de" },
     });
-  });
+  }, [dispatch]);
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * Math.floor(max));
   }
@@ -45,8 +45,8 @@ export default function Layout() {
   const clickHander = (value: string) => {
     console.log(value);
   };
-  const supportedLanguages = ["de", "fr", "jp"];
-  return supportedLanguages.includes(params?.lang || "") ? (
+  const supportedLanguages: SupportedLanguages[] = ["de", "fr", "jp"];
+  return (supportedLanguages as string[]).includes(params?.lang || "") ? (
     <>
       <AppHeader />
       <main className="max-w-screen-lg w-full px-4 m-auto pt-24">
@@ -76,5 +76,4 @@ export default function Layout() {
   ) : (
     <Navigate to="/error" replace />
   );
-  // <Route path=":/lang/*" element={} />
 }

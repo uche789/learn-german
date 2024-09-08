@@ -38,7 +38,6 @@ const App: React.FC = () => {
           <Route path="/error" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
-      {/* <ContinueButton answer="This is the answer" type="check" onClick={() => console.log('works')} /> */}
     </>
   );
 };

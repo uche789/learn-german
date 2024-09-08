@@ -7,7 +7,7 @@ type NavItemProps = {
   language: LevelLanguage;
 };
 
-const navItem: FC<NavItemProps> = ({ level, language }) => {
+const LevelLabel: FC<NavItemProps> = ({ level, language }) => {
   const className = `${LanguageLevelColour[language][level]} inline-flex items-center py-2 px-3 rounded-2xl text-sm font-semibold`;
   return (
     <div data-testid={"level-" + level} className={className}>
@@ -16,4 +16,4 @@ const navItem: FC<NavItemProps> = ({ level, language }) => {
   );
 };
 
-export default navItem;
+export default LevelLabel;

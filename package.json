@@ -25,7 +25,8 @@
     "start": "vite",
     "build": "vitest build",
     "serve": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "eslintConfig": {
     "extends": [

@@ -7,15 +7,15 @@ export enum LanguageProficienyLevel {
   Fluent = "Fluent",
 }
 
-export enum LevelLanguage {
-  Japanese = "Japanese",
-  European = "European",
-}
-
 export enum AppLanguage {
   Japanese = "Japanese",
   German = "German",
   French = "French",
+}
+
+export enum LevelLanguage {
+  Japanese = AppLanguage.Japanese,
+  European = "European",
 }
 
 export enum LessonTypeDefinition {
@@ -36,3 +36,12 @@ export enum IconType {
 }
 
 export type ButtonVariant = "primary" | "secondary" | "correct" | "wrong";
+
+export type Topic = {
+  lessonType: LessonTypeDefinition;
+  title: string;
+  levels: Set<LanguageProficienyLevel>;
+  to: string;
+}
+
+export type SupportedLanguages = "fr" | "de" | "jp";

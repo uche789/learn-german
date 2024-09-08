@@ -1,21 +1,32 @@
+import { AppLanguage, LevelLanguage, SupportedLanguages } from "@/types";
 import { ReactNode, createContext, useReducer } from "react";
 import { useParams, useRoutes } from "react-router-dom";
+
+const languages: Record<SupportedLanguages, AppLanguage> = {
+  fr: AppLanguage.French,
+  de: AppLanguage.German,
+  jp: AppLanguage.Japanese
+}
 
 export enum GlobalActionType {
   SetLang = "set_lang",
 }
 
 export type GlobalAction = {
-  type: GlobalActionType;
-  payload: { value: string };
+  type: GlobalActionType.SetLang;
+  payload: { value: SupportedLanguages };
 };
 
 interface GlobalState {
-  lang: string;
+  langCode: SupportedLanguages;
+  language: AppLanguage;
+  levelLanguage: LevelLanguage;
 }
 
 const initialState: GlobalState = {
-  lang: "de",
+  langCode: "de",
+  language: AppLanguage.German,
+  levelLanguage: LevelLanguage.European
 };
 
 export const GlobalContext = createContext<GlobalState>(initialState);
@@ -25,7 +36,12 @@ export const GlobalDispatch = createContext<React.Dispatch<GlobalAction>>(
 
 const reducer = (state: GlobalState, action: GlobalAction) => {
   if (action.type === GlobalActionType.SetLang) {
-    return { ...state, ...{ lang: action.payload.value } };
+    const language = languages[action.payload.value];
+    return { ...state, ...{ 
+      langCode: action.payload.value,
+      language: languages[action.payload.value],
+      levelLanguage: action.payload.value !== 'jp' ? LevelLanguage.European : language as unknown as LevelLanguage,
+    }};
   }
 
   throw new Error("Invalid Action");

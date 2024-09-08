@@ -1,11 +1,11 @@
-nav {
+.nav-site-menu {
   display: flex;
   justify-content: center;
 
   & > * {
-    min-width: 4.8rem;
+    min-width: 8rem;
     &:not(:last-child) {
-      @apply mr-2;
+      @apply mr-4;
     }
   }
 }

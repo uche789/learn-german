@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Component from "./select-item";
+import Component from "./SelectItem";
 import { IconType } from "@/types";
 
 describe("[base components]", () => {

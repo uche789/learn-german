@@ -1,5 +1,6 @@
 from typing import Annotated, List
-from fastapi import Depends, FastAPI, HTTPException
+from array import array, ArrayType
+from fastapi import Depends, FastAPI, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, Response
 from sqlmodel import Session, select
@@ -22,7 +23,7 @@ app = FastAPI(lifespan=lifespan)
 
 origins = [
     "http://localhost",
-    "http://localhost:5273/",
+    "http://localhost:5273",
 ]
 
 app.add_middleware(
@@ -42,6 +43,29 @@ async def get_vocab(session: SessionDep, lang: str) -> List[Vocab]:
     check_valid_language(lang)
     vocab = session.exec(select(Vocab).where(Vocab.language == lang))
     return vocab
+
+@app.post('/vocabulary/file')
+async def add_vocab(payload: UploadFile):
+    if payload.content_type != 'application/json':
+        raise HTTPException(status_code=400, detail='Invalid file type ' + payload.content_type + '. Please add a JSON file')
+    dataString = await payload.read()
+    data = json.loads(dataString)
+    if not isinstance(data, List):
+        raise HTTPException(status_code=400, detail='Invalid file content')
+    
+    session = Session(repo.engine)
+
+    try:
+        print(data.__len__())
+        for item in data:
+            db_vocab = Vocab.model_validate(item)
+            session.add(db_vocab)
+        session.commit()
+        session.close()
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=400, detail='Invalid file content')
+    return
 
 @app.post('/vocabulary/', response_model=Vocab)
 async def add_vocab(payload: VocabBase, session: SessionDep) -> Vocab:
@@ -85,4 +109,4 @@ async def generate_vocab(lang: str, session: SessionDep):
 
     with open(fileName, 'w', encoding='utf-8') as f:
         json.dump(list, f)
-    return FileResponse(path=fileName, filename=fileName)
+    return FileResponse(path=fileName, filename=fileName, media_type='application/json')

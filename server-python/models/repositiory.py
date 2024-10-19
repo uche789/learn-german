@@ -5,7 +5,7 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select, JSON, Colu
 
 
 class VocabBase(SQLModel):
-    word: str = Field(index=True)
+    word: str = Field(index=True, unique=True)
     english_translation: str
     definition: List[str] | None = Field(sa_column=Column(JSON))
     examples: List[str] | None = Field(sa_column=Column(JSON))

@@ -1,6 +1,6 @@
 from typing import Annotated, List
 from array import array, ArrayType
-from fastapi import Depends, FastAPI, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, Response
 from sqlmodel import Session, select
@@ -39,16 +39,16 @@ def check_valid_language(lang: str) -> bool:
         raise HTTPException(status_code=400, detail='Invalid language')
 
 @app.get('/vocabulary/')
-async def get_vocab(session: SessionDep, lang: str) -> List[Vocab]:
+async def get_vocab(session: SessionDep, lang: str, query = '', ) -> List[Vocab]:
     check_valid_language(lang)
     vocab = session.exec(select(Vocab).where(Vocab.language == lang))
     return vocab
 
 @app.post('/vocabulary/file')
-async def add_vocab(payload: UploadFile):
-    if payload.content_type != 'application/json':
-        raise HTTPException(status_code=400, detail='Invalid file type ' + payload.content_type + '. Please add a JSON file')
-    dataString = await payload.read()
+async def add_vocab(file: UploadFile = File(...)):
+    if file.content_type != 'application/json':
+        raise HTTPException(status_code=400, detail='Invalid file type ' + file.content_type + '. Please add a JSON file')
+    dataString = await file.read()
     data = json.loads(dataString)
     if not isinstance(data, List):
         raise HTTPException(status_code=400, detail='Invalid file content')
@@ -75,8 +75,8 @@ async def add_vocab(payload: VocabBase, session: SessionDep) -> Vocab:
     session.refresh(db_vocab)
     return db_vocab
 
-@app.put('/vocabulary/')
-async def put_vocab(vocab_id: int, payload: VocabBase, session: SessionDep) -> Vocab:
+@app.put('/vocabulary/{vocab_id}')
+async def put_vocab(vocab_id, payload: VocabBase, session: SessionDep) -> Vocab:
     db_vocab = session.get(Vocab, vocab_id)
     if not db_vocab:
         raise HTTPException(status_code=404, detail='Invalid payload')
@@ -87,8 +87,8 @@ async def put_vocab(vocab_id: int, payload: VocabBase, session: SessionDep) -> V
     session.refresh(db_vocab)
     return db_vocab
 
-@app.delete('/vocabulary/')
-async def delete_vocab(vocab_id: int, session: SessionDep) -> None:
+@app.delete('/vocabulary/{vocab_id}')
+async def delete_vocab(vocab_id, session: SessionDep) -> None:
     db_vocab = session.get(Vocab, vocab_id)
     if not db_vocab:
         return Response(status_code=204)
@@ -98,6 +98,7 @@ async def delete_vocab(vocab_id: int, session: SessionDep) -> None:
 
 @app.get('/vocabulary/download')
 async def generate_vocab(lang: str, session: SessionDep):
+    print('cimesss')
     check_valid_language(lang)
     fileName = lang + '.json'
     rawList = session.exec(select(Vocab).where(Vocab.language == lang))
@@ -110,3 +111,11 @@ async def generate_vocab(lang: str, session: SessionDep):
     with open(fileName, 'w', encoding='utf-8') as f:
         json.dump(list, f)
     return FileResponse(path=fileName, filename=fileName, media_type='application/json')
+
+@app.get('/vocabulary/{vocab_id}', response_model=Vocab)
+async def get_vocab_by_id(vocab_id, session: SessionDep):
+    db_vocab = session.get(Vocab, vocab_id)
+    if not db_vocab:
+        print('comes here for a wierd reason')
+        raise HTTPException(status_code=404, detail='Not found')
+    return db_vocab

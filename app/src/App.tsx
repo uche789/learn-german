@@ -6,6 +6,8 @@ import ErrorPage from "@/pages/ErrorPage";
 import Practice from "@/pages/practice";
 import Learn from "@/pages/learn";
 import GlobalStateProvider from "./context/global";
+import VocabAmin from "./pages/VocabAdmin";
+import VocabFormAdmin from "./pages/VocabFormAdmin";
 
 export type Word = {
   english: string;
@@ -33,7 +35,8 @@ const App: React.FC = () => {
             <Route path="/:lang/practice" element={<Practice />} />
             <Route path="/:lang/learn" element={<Learn />} />
           </Route>
-
+          <Route path="/admin" element={<VocabAmin />}/>
+          <Route path="/admin/vocab/form" element={<VocabFormAdmin />}/>
           <Route path="*" element={<ErrorPage />} />
           <Route path="/error" element={<ErrorPage />} />
         </Routes>

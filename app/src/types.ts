@@ -45,3 +45,12 @@ export type Topic = {
 }
 
 export type SupportedLanguages = "fr" | "de" | "jp";
+
+export type AdminVocabulary = {
+  vocab_id: number;
+  definition: string[];
+  examples: string[];
+  english_translation: string;
+  word: string;
+  language: SupportedLanguages
+}

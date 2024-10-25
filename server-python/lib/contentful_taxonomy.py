@@ -1,5 +1,7 @@
 import json
 
+## Endpoint https://api.contentful.com/organizations/{organizationId}/taxonomy/concepts?conceptScheme={conceptSchemeId}&access_token={cma_token}
+
 def get_taxonomies():
     filePath = './output/taxonomy.json'
     result = {}

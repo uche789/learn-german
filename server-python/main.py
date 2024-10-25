@@ -101,9 +101,8 @@ async def delete_vocab(vocab_id, session: SessionDep) -> None:
 
 @app.get('/vocabulary/download')
 async def generate_vocab(lang: str, session: SessionDep):
-    print('cimesss')
     check_valid_language(lang)
-    fileName = lang + '.json'
+    fileName = 'output/' + lang + '.json'
     rawList = session.exec(select(Vocab).where(Vocab.language == lang))
 
     list = []

@@ -8,7 +8,8 @@ export default function AdminViewer({ vocabulary, lang }: { vocabulary: AdminVoc
       {
         vocabulary.map((vocab) =>
           <div key={vocab.vocab_id} className="p-4 mb-2 border bg-gray-50">
-            <span className="text-lg font-semibold">{vocab.word}</span>
+            <span className="text-lg font-semibold">{vocab.word}</span> {vocab.gender && <span>&#123;{vocab.gender}&#125;</span>}
+            <p className="italic text-sm">{vocab.word_type}</p>
             <p><strong>Translation:</strong> {vocab.english_translation}</p>
             <span className="uppercase text-xs font-semibold">Definitions</span>
             <ol className="list-decimal pl-10">{vocab.definition.map((def, index) => <li key={index}>{def}</li>)}</ol>

@@ -34,11 +34,6 @@ export default function VocabFormAmin() {
     }
   }, [])
 
-  const u = (lang: SupportedLanguages) => {
-    setLang(lang)
-    console.log('sss')
-  }
-
   return <>
     <header><h1 className="text-xl m-4 font-semibold text-center">Manage vocabulary</h1></header>
     <main className="w-full max-w-3xl m-auto">

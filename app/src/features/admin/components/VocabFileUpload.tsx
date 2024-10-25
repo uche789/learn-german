@@ -1,11 +1,12 @@
 import { FormEventHandler, useState } from "react";
 import { uploadFile } from "../lib/api";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function VocabFileUpload() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [file, setFile] = useState<File | undefined>()
+  const navigate = useNavigate()
 
   const upload: FormEventHandler<HTMLFormElement> = async (e) => {
     setError(false)
@@ -20,7 +21,7 @@ export default function VocabFileUpload() {
     try {
       setLoading(true)
       await uploadFile(formData)
-      redirect('/admin')
+      navigate('/admin')
     } catch {
       alert('An error occurred');
     } finally {

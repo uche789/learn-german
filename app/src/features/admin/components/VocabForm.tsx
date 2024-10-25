@@ -1,7 +1,8 @@
 import { FormEventHandler, useEffect, useState } from "react"
 import { addVocabulary, deleteVocabulary, updatedVocabulary, } from "../lib/api"
-import { AdminVocabulary, SupportedLanguages } from "@/types"
-import { redirect, useNavigate } from "react-router-dom"
+import { AdminVocabulary, Gender, SupportedLanguages, WordType } from "@/types"
+import { useNavigate } from "react-router-dom"
+import { title } from "process"
 
 type TextAreaContent = {
   id: string
@@ -14,7 +15,8 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
   const navigate = useNavigate();
   const [word, setWord] = useState('')
   const [translation, setTranslation] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [wordType, setWordType] = useState<WordType>(WordType.Noun)
+  const [gender, setGender] = useState<string | null>(null)
   const [definitions, setDefinitions] = useState<TextAreaContent[]>([getDefaultTextAreaContent()])
   const [examples, setExamples] = useState<TextAreaContent[]>([getDefaultTextAreaContent()])
   
@@ -81,6 +83,8 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
         english_translation: translation,
         word,
         language: data?.language || lang,
+        gender: gender || null,
+        word_type: wordType
       }
       if (data) {
         await updatedVocabulary(data.vocab_id, payload);
@@ -105,16 +109,22 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
     }
   }
 
+  const inputClasses = 'border rounded border-gray-400 p-2';
+  const fieldSetClasses = 'border-b pb-5 border-gray-400';
+  const textAreaDefinition = [
+    {content: definitions, update: updatedDefinition, remove: removeDefinition, title: 'Definitions', suffix: 'definition', add: addDefinition},
+    {content: examples, update: updatedExample, remove: removeExample, title: 'Examples', suffix: 'example', add: addExample}
+  ]
 
   return <>
     <article>
       <form className="p-4" onSubmit={submit}>
-        <fieldset className="border-b pb-5 border-gray-400">
+        <fieldset className={fieldSetClasses}>
           <legend className="py-5 text-xl font-semibold">Basic data (Mandatory)</legend>
           <div>
             <label className="block font-semibold">Word</label>
             <input
-              className="border rounded border-gray-400 p-2"
+              className={inputClasses}
               type="text"
               defaultValue={word}
               onChange={(e) => setWord(e.target.value)}
@@ -123,49 +133,46 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
           <div className="mt-5">
             <label className="block font-semibold">English translation</label>
             <input
-              className="border rounded border-gray-400 p-2"
+              className={inputClasses}
               type="text"
               defaultValue={translation}
               onChange={(e) => setTranslation(e.target.value)}
             />
           </div>
-        </fieldset>
-        <fieldset className="border-b pb-5 border-gray-400">
-          <legend className="py-5 text-xl font-semibold">Definitions</legend>
-          <div>
-            {definitions.map((definition) => 
-              <div className="flex align-center mb-5" key={definition.id}>
-                <textarea 
-                  className="border p-2"
-                  defaultValue={definition.value}
-                  onChange={(e) => updatedDefinition(definition.id, e.target.value)}
-                />
-                <button className="text-red-600 underline ml-4" onClick={() => removeDefinition(definition.id)}>- Remove</button>
-              </div>
-            )}
-            <div className="mt-5">
-              <button className="p-2 border rounded border-gray-300" onClick={addDefinition}>+ Add definition</button>
-            </div>
+          <div className="mt-5">
+            <label className="block font-semibold">Word type</label>
+            <select className={inputClasses} style={{minWidth: '195px'}} onChange={(e) => setGender(e.target.value)}>
+              {Object.keys(WordType).map(aType => <option value={(WordType as Record<string, string>)[aType]}>{aType}</option>)}
+            </select>
+          </div>
+          <div className="mt-5">
+            <label className="block font-semibold">Gender</label>
+            <select className={inputClasses} style={{minWidth: '195px'}} onChange={(e) => setGender(e.target.value)}>
+              <option value="">None</option>
+              {Object.keys(Gender).map(aGender => <option value={Gender[aGender]}>{aGender}</option>)}
+            </select>
           </div>
         </fieldset>
-        <fieldset className="border-b pb-5 border-gray-400">
-          <legend className="py-5 text-xl font-semibold">Examples</legend>
-          <div>
-            {examples.map((example) => 
-              <div className="flex align-center mb-5" key={example.id}>
-                <textarea 
-                  className="border p-2"
-                  defaultValue={example.value}
-                  onChange={(e) => updatedExample(example.id, e.target.value)}
-                />
-                <button className="text-red-600 underline ml-4" onClick={() => removeExample(example.id)}>- Remove</button>
+        { textAreaDefinition.map((item) => 
+          <fieldset className={fieldSetClasses} key={item.suffix}>
+            <legend className="py-5 text-xl font-semibold">{item.title}</legend>
+            <div>
+              {item.content.map((content) => 
+                <div className="flex align-center mb-5" key={content.id}>
+                  <textarea 
+                    className="border p-2"
+                    defaultValue={content.value}
+                    onChange={(e) => item.update(content.id, e.target.value)}
+                  />
+                  <button className="text-red-600 underline ml-4" onClick={() => item.remove(content.id)}>- Remove</button>
+                </div>
+              )}
+              <div className="mt-5">
+                <button className="p-2 border rounded border-gray-300" onClick={item.add}>+ Add {item.suffix}</button>
               </div>
-            )}
-            <div className="mt-5">
-              <button className="p-2 border rounded border-gray-300" onClick={addExample}>+ Add Example</button>
             </div>
-          </div>
-        </fieldset>
+          </fieldset>
+        )}
         <div className="flex justify-between mt-12">
           {data && <button className="text-red-600 border-red-600 p-2 border rounded" onClick={remove}>Delete</button>}
           <button type="submit" className="p-2 border rounded bg-blue-500 text-white justify-self-end">Submit</button>

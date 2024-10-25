@@ -46,11 +46,27 @@ export type Topic = {
 
 export type SupportedLanguages = "fr" | "de" | "jp";
 
+export enum WordType {
+  Noun = "Noun",
+  Verb = "Verb",
+  Adverb = "Adverb",
+  Adjective = "Adjective",
+}
+
+export const Gender: Readonly<Record<string, string>> = Object.freeze({
+  Feminine: "f",
+  Masculine: "m",
+  Netural: "m",
+  Plural: "p",
+})
+
 export type AdminVocabulary = {
   vocab_id: number;
   definition: string[];
   examples: string[];
   english_translation: string;
   word: string;
+  gender: string | null;
+  word_type: WordType | null;
   language: SupportedLanguages
 }

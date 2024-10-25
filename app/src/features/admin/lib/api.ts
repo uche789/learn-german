@@ -1,7 +1,8 @@
 import { AdminVocabulary } from "@/types";
 
-export const getVocabulary = async (lang: string) => {
-    const request = await fetch(`http://localhost:8000/vocabulary?lang=${lang}`);
+export const getVocabulary = async (lang: string, query?: string) => {
+    const queryParam = query ? `&query=${query}` : ''
+    const request = await fetch(`http://localhost:8000/vocabulary?lang=${lang}${queryParam}`);
 
     if (!request.ok) {
         throw new Error(request.statusText);
@@ -24,7 +25,7 @@ export const getVocabularyById = async (id: number) => {
 
 export const deleteVocabulary = async (id: number) => {
     const request = await fetch(`http://localhost:8000/vocabulary/${id}`, { method: 'delete'});
-    
+
     if (!request.ok) {
         throw new Error(request.statusText);
     }

@@ -9,6 +9,7 @@ export default function VocabAmin() {
   const [lang, setLang] = useState<SupportedLanguages>('de')
   const [data, setData] = useState<AdminVocabulary[]>([])
   const [error, setError] = useState(false)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     if (!window.location.origin.includes('http://localhost')) {
@@ -18,11 +19,16 @@ export default function VocabAmin() {
 
   useEffect(() => {
     async function fetchData() {
-      setData(await getVocabulary(lang))
+      setData(await getVocabulary(lang, query))
     }
 
     fetchData();
-  }, [lang])
+  }, [lang, query])
+
+  const onLanguageSwitch = (lang: SupportedLanguages) => {
+    setQuery('');
+    setLang(lang);
+  }
 
   return <>
     <header><h1 className="text-xl m-4 font-semibold text-center">Manage vocabulary</h1></header>
@@ -32,10 +38,18 @@ export default function VocabAmin() {
           <p>Ops, you cannot access this page</p>
           :
           <>
-            <SwitchLang updateLang={(lang: SupportedLanguages) => setLang(lang)} />
+            <SwitchLang updateLang={onLanguageSwitch} />
             <Link to={{ pathname: '/admin/vocab/form', search: `lang=${lang}`}}>
               <span className="p-2 border rounded bg-blue-500 text-white">Add vocabulary</span>
             </Link>
+            <div className="mb-5">
+              <input
+                type="text" className="p-2 border border-gray-400 rounded w-full"
+                placeholder="Search word"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </div>
             <AdminViewer vocabulary={data} lang={lang} />
           </>
       }

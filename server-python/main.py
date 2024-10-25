@@ -3,7 +3,7 @@ from array import array, ArrayType
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, Response
-from sqlmodel import Session, select
+from sqlmodel import Session, select, col
 import json
 from models.repositiory import Repository, Vocab, VocabBase
 from contextlib import asynccontextmanager
@@ -39,9 +39,12 @@ def check_valid_language(lang: str) -> bool:
         raise HTTPException(status_code=400, detail='Invalid language')
 
 @app.get('/vocabulary/')
-async def get_vocab(session: SessionDep, lang: str, query = '', ) -> List[Vocab]:
+async def get_vocab(session: SessionDep, lang: str, query = '') -> List[Vocab]:
     check_valid_language(lang)
-    vocab = session.exec(select(Vocab).where(Vocab.language == lang))
+    if query:
+        vocab = session.exec(select(Vocab).where(Vocab.language == lang).where(col(Vocab.word).contains(query)).order_by(Vocab.word))
+    else:
+        vocab = session.exec(select(Vocab).where(Vocab.language == lang).order_by(Vocab.word))
     return vocab
 
 @app.post('/vocabulary/file')

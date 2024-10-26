@@ -1,4 +1,4 @@
-import { LanguageProficienyLevel, LevelLanguage } from "@/types";
+import { LanguageProficienyLevel, LevelLanguage } from "@/lib/types";
 
 type LanguageLevelMatch = Record<LanguageProficienyLevel, string>;
 

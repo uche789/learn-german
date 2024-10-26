@@ -1,4 +1,4 @@
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 import SvgIcon from "@/components/svg-icon/svg-icon";
 import "./AppHeader.scss";
 import Dropdown from "@/components/dropdown/dropdown";

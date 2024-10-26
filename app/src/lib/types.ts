@@ -24,12 +24,13 @@ export enum LessonTypeDefinition {
   Declension = "Declension",
   Genitive = "Genitive",
   Conjunction = "Conjunction",
+
 }
 
 export enum IconType {
-  Japanese = "Japanese",
-  German = "German",
-  French = "French",
+  Japanese = AppLanguage.Japanese,
+  German = AppLanguage.German,
+  French = AppLanguage.French,
   Learn = "Learn",
   Practice = "Practice",
   ArrowLeft = "ArrowLeft",
@@ -38,7 +39,8 @@ export enum IconType {
 export type ButtonVariant = "primary" | "secondary" | "correct" | "wrong";
 
 export type Topic = {
-  lessonType: LessonTypeDefinition;
+  id: string;
+  lessonType: string;
   title: string;
   levels: Set<LanguageProficienyLevel>;
   to: string;
@@ -69,4 +71,15 @@ export type AdminVocabulary = {
   gender: string | null;
   word_type: WordType | null;
   language: SupportedLanguages
+}
+
+export type IdiomBase = {
+  contentfulMetadata: { concepts: Array<{ id: string }> };
+  idiom: string;
+  sys: { id: string }
+}
+
+export type Idiom = IdiomBase & {
+  examples: string;
+  meaning: string;
 }

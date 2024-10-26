@@ -1,4 +1,4 @@
-import { AppLanguage, LevelLanguage, SupportedLanguages } from "@/types";
+import { AppLanguage, LevelLanguage, SupportedLanguages } from "@/lib/types";
 import { ReactNode, createContext, useReducer } from "react";
 import { useParams, useRoutes } from "react-router-dom";
 

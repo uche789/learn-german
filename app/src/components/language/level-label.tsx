@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { LanguageLevelColour, languageLevelDefinition } from "./data";
-import { LanguageProficienyLevel, LevelLanguage } from "@/types";
+import { LanguageProficienyLevel, LevelLanguage } from "@/lib/types";
 
 type NavItemProps = {
   level: LanguageProficienyLevel;

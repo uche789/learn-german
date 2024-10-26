@@ -1,4 +1,4 @@
-import { SupportedLanguages } from "@/types";
+import { SupportedLanguages } from "@/lib/types";
 import { useEffect } from "react";
 
 export default function SwitchLang({ updateLang, value = 'de' }: {

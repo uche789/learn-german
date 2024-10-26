@@ -5,6 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
 import Practice from "@/pages/practice";
 import Learn from "@/pages/learn";
+import Idioms from "@/pages/idioms";
 import GlobalStateProvider from "./context/global";
 import VocabAmin from "./pages/VocabAdmin";
 import VocabFormAdmin from "./pages/VocabFormAdmin";
@@ -34,6 +35,7 @@ const App: React.FC = () => {
             <Route index element={<Learn />} />
             <Route path="/:lang/practice" element={<Practice />} />
             <Route path="/:lang/learn" element={<Learn />} />
+            <Route path="/:lang/idioms" element={<Idioms />} />
           </Route>
           <Route path="/admin" element={<VocabAmin />}/>
           <Route path="/admin/vocab/form" element={<VocabFormAdmin />}/>

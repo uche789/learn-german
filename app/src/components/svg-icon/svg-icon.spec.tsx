@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import SvgIcon from "./svg-icon";
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 
 test("renders french svg icon", async () => {
   render(<SvgIcon name={IconType.French} />);

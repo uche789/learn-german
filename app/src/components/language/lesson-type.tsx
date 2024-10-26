@@ -1,4 +1,4 @@
-import { LessonTypeDefinition } from "@/types";
+import { LessonTypeDefinition } from "@/lib/types";
 
 const text: Record<LessonTypeDefinition, string> = {
   [LessonTypeDefinition.Grammar]: "Grammer",

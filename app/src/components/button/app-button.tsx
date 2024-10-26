@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, ReactNode } from "react";
 import "./app-button.scss";
-import { ButtonVariant } from "@/types";
+import { ButtonVariant } from "@/lib/types";
 
 type ButtonProps = {
   variant?: ButtonVariant;

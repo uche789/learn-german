@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Component from "./level-label";
-import { LanguageProficienyLevel, LevelLanguage } from "@/types";
+import { LanguageProficienyLevel, LevelLanguage } from "@/lib/types";
 
 describe("[base components] level label", () => {
   test("renders correct", async () => {

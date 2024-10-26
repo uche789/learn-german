@@ -1,4 +1,4 @@
-import { AppLanguage, LanguageProficienyLevel, LevelLanguage, Topic } from "@/types";
+import { AppLanguage, LanguageProficienyLevel, LevelLanguage, Topic } from "@/lib/types";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import LessonType from "../language/lesson-type";

@@ -1,5 +1,5 @@
 import AppButton from "@/components/button/app-button";
-import { ButtonVariant } from "@/types";
+import { ButtonVariant } from "@/lib/types";
 import { MouseEventHandler } from "react";
 
 type TextType = "check" | "wrong" | "correct";

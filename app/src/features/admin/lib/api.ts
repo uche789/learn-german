@@ -1,4 +1,4 @@
-import { AdminVocabulary } from "@/types";
+import { AdminVocabulary } from "@/lib/types";
 
 export const getVocabulary = async (lang: string, query?: string) => {
     const queryParam = query ? `&query=${query}` : ''

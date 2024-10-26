@@ -2,7 +2,7 @@ import SwitchLang from "@/features/admin/components/SwitchLang";
 import VocabFileUpload from "@/features/admin/components/VocabFileUpload";
 import VocabForm from "@/features/admin/components/VocabForm";
 import { getVocabularyById } from "@/features/admin/lib/api";
-import { AdminVocabulary, SupportedLanguages } from "@/types";
+import { AdminVocabulary, SupportedLanguages } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 

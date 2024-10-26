@@ -1,6 +1,6 @@
 import { FormEventHandler, useEffect, useState } from "react"
 import { addVocabulary, deleteVocabulary, updatedVocabulary, } from "../lib/api"
-import { AdminVocabulary, Gender, SupportedLanguages, WordType } from "@/types"
+import { AdminVocabulary, Gender, SupportedLanguages, WordType } from "@/lib/types"
 import { useNavigate } from "react-router-dom"
 import { title } from "process"
 

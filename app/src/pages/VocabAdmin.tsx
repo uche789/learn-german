@@ -1,7 +1,7 @@
 import AdminViewer from "@/features/admin/components/AdminViewer";
 import SwitchLang from "@/features/admin/components/SwitchLang";
 import { getVocabulary } from "@/features/admin/lib/api";
-import { AdminVocabulary, SupportedLanguages } from "@/types";
+import { AdminVocabulary, SupportedLanguages } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

@@ -1,0 +1,47 @@
+query postCollectionQuery {
+  postCollection (where: {
+    contentfulMetadata: {
+      concepts_exists: true
+      concepts: {
+        id_contains_all: ["4CzbSrnYkCxEwCtMbSDocq"]
+      }
+    } 
+  }) {
+    items {
+      title
+      contentfulMetadata {
+        concepts {
+          id
+        }
+      }
+    }
+  }
+}
+
+query idiomsCollectionQuery {
+  postCollection (where: {
+    contentfulMetadata: {
+      concepts_exists: true
+      concepts: {
+        id_contains_all: ["4CzbSrnYkCxEwCtMbSDocq"]
+      }
+    } 
+  }) {
+    items {
+      title
+    }
+  }
+}
+
+query postCollectionQuery {
+  postCollection {
+    items {
+      title
+      contentfulMetadata {
+        concepts {
+          id
+        }
+      }
+    }
+  }
+}

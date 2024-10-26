@@ -1,4 +1,4 @@
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 import SelectItem from "@/components/select-item/SelectItem";
 import "./AppNav.scss";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,6 +11,10 @@ const navItems: Array<{
   {
     icon: IconType.Learn, label: "Learn",
     path: "learn"
+  },
+  {
+    icon: IconType.Learn, label: "Idioms",
+    path: "idioms"
   },
   {
     icon: IconType.Practice, label: "Practice",

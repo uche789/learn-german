@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler } from "react";
 import SvgIcon from "../svg-icon/svg-icon";
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 import { click } from "@testing-library/user-event/dist/types/setup/directApi";
 
 type NavItem = {

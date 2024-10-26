@@ -1,7 +1,7 @@
 import { FC } from "react";
 import "./dropdown.scss";
 import SvgIcon from "../svg-icon/svg-icon";
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 
 type DropdownProps = {
   linkName: string;

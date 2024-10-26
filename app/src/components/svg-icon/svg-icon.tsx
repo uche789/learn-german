@@ -2,7 +2,7 @@
 
 import { Suspense, lazy as _lazy, useMemo } from "react";
 import icons from "./icons";
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 import "./svg-icon.scss";
 
 const svgIcon = ({ name }: { name: IconType }) => {

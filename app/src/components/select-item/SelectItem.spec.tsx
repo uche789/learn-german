@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Component from "./SelectItem";
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 
 describe("[base components]", () => {
   test("should render correctly", async () => {

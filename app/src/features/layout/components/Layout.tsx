@@ -2,7 +2,7 @@ import { Word } from "@/App";
 import SelectItem from "@/components/select-item/SelectItem";
 import Card from "@/features/card/Card";
 import Switcher from "@/features/switcher/Switcher";
-import { IconType, SupportedLanguages } from "@/types";
+import { IconType, SupportedLanguages } from "@/lib/types";
 import React, { useContext, useEffect } from "react";
 import { Outlet, Navigate, useParams } from "react-router-dom";
 import AppHeader from "./app-header/AppHeader";

@@ -1,4 +1,4 @@
-import { IconType } from "@/types";
+import { IconType } from "@/lib/types";
 import { LazyExoticComponent, lazy } from "react";
 
 const icons: Record<IconType, LazyExoticComponent<any>> = {

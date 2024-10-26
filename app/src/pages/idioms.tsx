@@ -14,7 +14,7 @@ export default function Idioms() {
     async function fetchData() {
       try {
         setLoading(true);
-        const result = await getIdiomsCollection([categories.languages[state.language]], state.langCode);
+        const result = await getIdiomsCollection([categories.languages[state.language]], state.langCode, state.language);
         setIdioms(result);
       } catch (error) {
         // set error here

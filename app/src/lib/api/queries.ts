@@ -62,3 +62,16 @@ export const idiomQuery = (slug: string) => `query idiomsCollectionQuery {
     }
   }
 }`
+
+export const postQuery = (slug: string) => `query postCollectionQuery {
+  postCollection (limit: 1, where: { slug: "${slug}"}) {
+    items {
+      title
+      contentfulMetadata {
+        concepts {
+          id
+        }
+      }
+    }
+  }
+}`

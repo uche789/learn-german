@@ -84,3 +84,14 @@ export type Idiom = IdiomBase & {
   examples: string;
   meaning: string;
 }
+
+export type PostBase = {
+  contentfulMetadata: { concepts: Array<{ id: string }> };
+  title: string;
+  sys: { id: string }
+  slug: string
+}
+
+export type Post = PostBase & {
+  content: any
+}

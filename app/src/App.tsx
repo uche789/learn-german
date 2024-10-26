@@ -7,6 +7,9 @@ import Practice from "@/pages/practice";
 import Learn from "@/pages/learn";
 import Idioms from "@/pages/idioms";
 import Idiom from "@/pages/idiom";
+import Grammar from "@/pages/GrammarPage";
+import Vocab from "@/pages/vocab";
+import VocabPractice from "@/pages/VocabPractice";
 import GlobalStateProvider from "./context/global";
 import VocabAmin from "./pages/VocabAdmin";
 import VocabFormAdmin from "./pages/VocabFormAdmin";
@@ -38,6 +41,9 @@ const App: React.FC = () => {
             <Route path="/:lang/learn" element={<Learn />} />
             <Route path="/:lang/idioms" element={<Idioms />} />
             <Route path="/:lang/idiom/:slug" element={<Idiom />} />
+            <Route path="/:lang/grammar/:slug" element={<Grammar />} />
+            <Route path="/:lang/vocabulary/" element={<Vocab />} />
+            <Route path="/:lang/vocabulary/:slug" element={<VocabPractice />} />
           </Route>
           <Route path="/admin" element={<VocabAmin />}/>
           <Route path="/admin/vocab/form" element={<VocabFormAdmin />}/>

@@ -16,7 +16,12 @@ export default function TopicList({ topics, language }: { topics: Topic[], langu
               <div className="px-8 py-4 border-gray-200 border rounded-xl shadow-md hover:bg-grey-100 sm:w-full md:w-3/4">
                 <LessonType lessonType={topic.lessonType} />
                 <strong dangerouslySetInnerHTML={{__html: topic.title}}/>
-                {Array.from(topic.levels).map((level) => <LevelLabel language={language} level={level} key={level} />)}
+                {
+                  (!!topic.levels && topic.levels.size > 0) &&
+                  <div className="mt-2 *:mr-1">
+                    {Array.from(topic.levels).map((level) => <LevelLabel language={language} level={level} key={level} />)}
+                  </div>
+                }
               </div>
             </Link>
           )}

@@ -1,5 +1,5 @@
-import { AppLanguage, Idiom, LanguageProficienyLevel, SupportedLanguages, Topic } from "../types";
-import { idiomQuery, idiomsCollectionQuery, postCollectionQuery } from "./queries";
+import { AppLanguage, Idiom, IdiomBase, LanguageProficienyLevel, Post, PostBase, SupportedLanguages, Topic } from "../types";
+import { idiomQuery, idiomsCollectionQuery, postCollectionQuery, postQuery } from "./queries";
 import remarkHtml from "remark-html";
 import { remark } from "remark";
 import GeneralError from "./errors/GeneralError";
@@ -30,11 +30,37 @@ async function fetchData(query: string) {
   }
 }
 
-export const getPostCollection = async (ids: string[], langCode: SupportedLanguages) => {
-  const query = postCollectionQuery(ids);
+export const getPostCollection = async (ids: string[], langCode: SupportedLanguages, language: AppLanguage) => {
+  const query = postCollectionQuery([...ids, categories.languages[language]]);
   const { data, error } = await fetchData(query);
 
-  return data;
+  if (error) {
+    throw new GraphQLError(error)
+  }
+
+  const result: Topic[] = [];
+
+  (data.postCollection.items as PostBase[]).forEach(async (item) => {
+    const levels: LanguageProficienyLevel[] = [];
+    const foundLessonType = item.contentfulMetadata.concepts.find((concept) => categoriesAlt.grammar[concept.id]);
+    const lessonType = categoriesAlt.grammar[foundLessonType?.id || ''] ||  'Grammar';
+    item.contentfulMetadata.concepts.forEach((concept) => {
+      if (categoriesAlt["language levels"][concept.id]) {
+        levels.push(categoriesAlt["language levels"][concept.id] as LanguageProficienyLevel)
+      }
+    })
+
+    result.push({
+      id: item.sys.id,
+      title: item.title,
+      lessonType: lessonType,
+      levels: new Set(levels),
+      to: `/${langCode}/grammar/${item.slug}`
+    })
+
+  })
+
+  return result;
 }
 
 export const getIdiom = async (id: string) => {
@@ -56,8 +82,24 @@ export const getIdiom = async (id: string) => {
   return item;
 }
 
-export const getIdiomsCollection = async (ids: string[], langCode: SupportedLanguages) => {
-  const query = idiomsCollectionQuery(ids);
+export const getPost = async (id: string) => {
+  const query = postQuery(id);
+  const { data, error } = await fetchData(query);
+
+  if (error) {
+    throw new GraphQLError(error)
+  }
+
+  if (error) {
+    throw new NotFound()
+  }
+
+  const item = data.postCollection.items[0] as Post;
+  return item;
+}
+
+export const getIdiomsCollection = async (ids: string[], langCode: SupportedLanguages, language: AppLanguage) => {
+  const query = idiomsCollectionQuery([...ids, categories.languages[language]]);
   const { data, error } = await fetchData(query);
 
   if (error) {
@@ -66,7 +108,7 @@ export const getIdiomsCollection = async (ids: string[], langCode: SupportedLang
 
   const result: Topic[] = [];
 
-  (data.idiomsCollection.items as Idiom[]).forEach(async (item) => {
+  (data.idiomsCollection.items as IdiomBase[]).forEach(async (item) => {
     const levels: LanguageProficienyLevel[] = [];
     item.contentfulMetadata.concepts.forEach((concept) => {
       if (categoriesAlt["language levels"][concept.id]) {

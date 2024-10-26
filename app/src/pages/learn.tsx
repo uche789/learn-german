@@ -15,19 +15,19 @@ export default function Practice() {
   }, [state])
 
   const topic: Topic = {
-    id: '1',
     lessonType: LessonTypeDefinition.Genitive,
     title: "Deklination",
     levels: new Set([LanguageProficienyLevel.UpperBeginner]),
-    to: "/fr/llll"
+    to: "/fr/llll",
+    id: "1"
   }
 
   const topicJp: Topic = {
-    id: '2',
     lessonType: LessonTypeDefinition.Grammar,
     title: "Ni kakawarazu",
     levels: new Set([LanguageProficienyLevel.UpperIntermediary]),
-    to: "/fr/llll"
+    to: "/fr/llll",
+    id: "2"
   }
 
   const topics: Record<AppLanguage, Topic[]> = {

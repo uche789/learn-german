@@ -12,6 +12,7 @@ export const postCollectionQuery = (conceptIds: string[]) => `query postCollecti
         id
       }
       title
+      slug
       contentfulMetadata {
         concepts {
           id
@@ -34,6 +35,22 @@ export const idiomsCollectionQuery = (conceptIds: string[]) => `query idiomsColl
       sys {
         id
       }
+      idiom
+      meaning
+      examples
+      slug
+      contentfulMetadata {
+        concepts {
+          id
+        }
+      }
+    }
+  }
+}`
+
+export const idiomQuery = (slug: string) => `query idiomsCollectionQuery {
+  idiomsCollection (limit: 1, where: { slug: "${slug}"}) {
+    items {
       idiom
       meaning
       examples

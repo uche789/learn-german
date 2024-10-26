@@ -6,6 +6,7 @@ import ErrorPage from "@/pages/ErrorPage";
 import Practice from "@/pages/practice";
 import Learn from "@/pages/learn";
 import Idioms from "@/pages/idioms";
+import Idiom from "@/pages/idiom";
 import GlobalStateProvider from "./context/global";
 import VocabAmin from "./pages/VocabAdmin";
 import VocabFormAdmin from "./pages/VocabFormAdmin";
@@ -36,6 +37,7 @@ const App: React.FC = () => {
             <Route path="/:lang/practice" element={<Practice />} />
             <Route path="/:lang/learn" element={<Learn />} />
             <Route path="/:lang/idioms" element={<Idioms />} />
+            <Route path="/:lang/idiom/:slug" element={<Idiom />} />
           </Route>
           <Route path="/admin" element={<VocabAmin />}/>
           <Route path="/admin/vocab/form" element={<VocabFormAdmin />}/>

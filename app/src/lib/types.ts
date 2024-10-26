@@ -1,8 +1,8 @@
 export enum LanguageProficienyLevel {
   Beginner = "Beginner",
-  UpperBeginner = "UpperBeginner",
+  UpperBeginner = "Upper Beginner",
   Intermediary = "Intermediary",
-  UpperIntermediary = "UpperIntermediary",
+  UpperIntermediary = "Upper Intermediary",
   Advanced = "Advanced",
   Fluent = "Fluent",
 }
@@ -77,6 +77,7 @@ export type IdiomBase = {
   contentfulMetadata: { concepts: Array<{ id: string }> };
   idiom: string;
   sys: { id: string }
+  slug: string
 }
 
 export type Idiom = IdiomBase & {

@@ -15,7 +15,8 @@ export default function TopicList({ topics, language }: { topics: Topic[], langu
             <Link to={topic.to} key={topic.id}>
               <div className="px-8 py-4 border-gray-200 border rounded-xl shadow-md hover:bg-grey-100 w-full">
                 <LessonType lessonType={topic.lessonType} />
-                <strong dangerouslySetInnerHTML={{__html: topic.title}}/>
+                <strong>{topic.title}</strong>
+                {topic.subTitle && <p>{topic.subTitle}</p>}
                 {
                   (!!topic.levels && topic.levels.size > 0) &&
                   <div className="mt-2 *:mr-1">

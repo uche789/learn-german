@@ -21,9 +21,6 @@ export default function Layout() {
     });
   }, [dispatch]);
 
-  const clickHander = (value: string) => {
-    console.log(value);
-  };
   const supportedLanguages: SupportedLanguages[] = ["de", "fr", "jp"];
   return (supportedLanguages as string[]).includes(params?.lang || "") ? (
     <>

@@ -1,15 +1,13 @@
 import React from "react";
 import "./card.css";
-import { Word } from "../../App";
+import { SupportedLanguages, VocabularyWithTranslation } from "@/lib/types";
 
 interface CardProps {
-  word: Word;
+  word: VocabularyWithTranslation;
 }
 
-type Lang = "en" | "de";
-
 const Card: React.FC<CardProps> = ({ word }) => {
-  const [lang, setLang] = React.useState<Lang>("de");
+  const [lang, setLang] = React.useState<string>();
   const [show, setShow] = React.useState(false);
 
   React.useEffect(() => {
@@ -17,27 +15,27 @@ const Card: React.FC<CardProps> = ({ word }) => {
   }, [word]);
 
   const getLangText = () => {
-    return lang === "en" ? "DE" : "EN";
+    return lang === "en" ? word.language.toUpperCase() : "EN";
   };
 
   const getWord = () => {
-    return lang === "en" ? word.english : word.german;
+    return lang === "en" ? word.translation : word.word;
   };
 
   const switchLang = () => {
-    setLang(lang === "en" ? "de" : "en");
+    setLang(lang === "en" ? word.language : "en");
   };
 
   return (
     <>
       {show && (
-        <div className="card">
-          <div className="card-heading">
-            <div className="card-lang" onClick={switchLang}>
+        <div className="rounded-md border p-4">
+          <div className="relative">
+            <button className="rounded-full absolute bg-blue-500 text-white p-2 right-0 top-0" onClick={switchLang}>
               {getLangText()}
-            </div>
+            </button>
           </div>
-          <div className="card-content">{getWord()}</div>
+          <div className="text-center text-2xl font-semi-bold my-8">{getWord()}</div>
         </div>
       )}
     </>

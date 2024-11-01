@@ -44,6 +44,7 @@ export type Topic = {
   id: string;
   lessonType: string;
   title: string;
+  subTitle?: string;
   levels: Set<LanguageProficienyLevel>;
   to: string;
 }
@@ -72,7 +73,8 @@ export type AdminVocabulary = {
   word: string;
   gender: string | null;
   word_type: WordType | null;
-  language: SupportedLanguages
+  language: SupportedLanguages,
+  levels: LanguageProficienyLevel[]
 }
 
 export type IdiomBase = {
@@ -97,3 +99,9 @@ export type PostBase = {
 export type Post = PostBase & {
   content: any
 }
+
+export type VocabularyWithTranslation = {
+  word: string;
+  translation: string;
+  language: string;
+};

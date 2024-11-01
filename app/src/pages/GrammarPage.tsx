@@ -36,7 +36,9 @@ export default function Practice() {
   }, [state, searchParams])
 
   return <article>
-    <GrammarType  />
+    <div className="mb-8">
+      <GrammarType />
+    </div>
     {!!posts.length && <TopicList topics={posts} language={state.levelLanguage} />}
   </article>;
 }

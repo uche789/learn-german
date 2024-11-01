@@ -15,11 +15,6 @@ import GlobalStateProvider from "./context/global";
 import VocabAmin from "./pages/VocabAdmin";
 import VocabFormAdmin from "./pages/VocabFormAdmin";
 
-export type Word = {
-  english: string;
-  german: string;
-};
-
 const App: React.FC = () => {
   return (
     <>

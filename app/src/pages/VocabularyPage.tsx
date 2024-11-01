@@ -1,6 +1,7 @@
 import TopicList from "@/components/topicList/TopicList";
 import { GlobalContext } from "@/context/global";
 import Heading from "@/features/layout/components/Heading";
+import { getFile, getTopics } from "@/features/vocabulary/lib/api";
 import { AdminVocabulary, LanguageProficienyLevel, Topic } from "@/lib/types";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,20 +9,20 @@ import { useParams } from "react-router-dom";
 export default function VocabularyPage() {
   const state = useContext(GlobalContext);
   const [query, setQuery] = useState('')
-  const [data, setData] = useState<AdminVocabulary[]>([])
-
-  const topics: Topic[] = [
-    {
-      id: "1",
-      lessonType: "",
-      title: "Apfel",
-      levels: new Set([LanguageProficienyLevel.Beginner, LanguageProficienyLevel.UpperBeginner]),
-      to: `/${state.langCode}/vocabulary/apfel`
-    }
-  ]
+  const [data, setData] = useState<Topic[]>([])
+  const params = useParams()
 
   useEffect(() => {
-    console.log('comes here')
+    async function fetchData() {
+      try {
+        setData([]);
+        const result = await getTopics(state.langCode);
+        setData(result);
+      } catch {
+      }
+    }
+
+    fetchData()
   }, [state.langCode, query])
 
   return <div>
@@ -34,7 +35,7 @@ export default function VocabularyPage() {
         onChange={(e) => setQuery(e.target.value)}
       />
     </div>
-    <TopicList topics={topics} language={state.levelLanguage} />
+    <TopicList topics={data} language={state.levelLanguage} />
   </div>;
 }
 

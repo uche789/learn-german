@@ -27,7 +27,9 @@ export default function VocabFormAmin() {
       setLoading(false)
     }
 
-    setLang(searchParams.get('lang') as SupportedLanguages)
+    if (searchParams.has('lang')) {
+      setLang(searchParams.get('lang') as SupportedLanguages)
+    }
     const id = searchParams.get('id')
     if (id) {
       fetchData(Number(id));

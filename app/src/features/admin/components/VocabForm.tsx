@@ -1,8 +1,8 @@
-import { FormEventHandler, useEffect, useState } from "react"
+import { DetailedHTMLProps, FormEvent, FormEventHandler, FormHTMLAttributes, useEffect, useState } from "react"
 import { addVocabulary, deleteVocabulary, updatedVocabulary, } from "../lib/api"
-import { AdminVocabulary, Gender, SupportedLanguages, WordType } from "@/lib/types"
+import { AdminVocabulary, Gender, LanguageProficienyLevel, SupportedLanguages, WordType } from "@/lib/types"
 import { useNavigate } from "react-router-dom"
-import { title } from "process"
+import { finalization, title } from "process"
 
 type TextAreaContent = {
   id: string
@@ -13,18 +13,11 @@ const getDefaultTextAreaContent = (): TextAreaContent => ({ id: crypto.randomUUI
 
 export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabulary, lang?: SupportedLanguages}) {
   const navigate = useNavigate();
-  const [word, setWord] = useState('')
-  const [translation, setTranslation] = useState('')
-  const [wordType, setWordType] = useState<WordType>(WordType.Noun)
-  const [gender, setGender] = useState<string | null>(null)
   const [definitions, setDefinitions] = useState<TextAreaContent[]>([getDefaultTextAreaContent()])
   const [examples, setExamples] = useState<TextAreaContent[]>([getDefaultTextAreaContent()])
   
   useEffect(() => {
     if (data) {
-      setWord(data.word);
-      setTranslation(data.english_translation);
-
       if (data.definition && data.definition.length) {
         setDefinitions(data.definition.map((definition) => ({ id: crypto.randomUUID(), value: definition })))
       }
@@ -74,17 +67,19 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
     setExamples(updated);
   }
 
-  const submit: FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
+  const submitAction: FormEventHandler<HTMLFormElement> = async (formEvent) => {
+    formEvent.preventDefault()
     try {
+      const formData = new FormData(formEvent.currentTarget)
       const payload: Omit<AdminVocabulary, 'vocab_id'> = {
         definition: definitions.map(d => d.value).filter(val => !!val),
         examples: examples.map(e => e.value).filter(val => !!val),
-        english_translation: translation,
-        word,
+        english_translation: formData.get('translation') as string,
+        word: formData.get('word') as string,
         language: data?.language || lang,
-        gender: gender || null,
-        word_type: wordType
+        gender: formData.get('gender') as string || null,
+        word_type: formData.get('word_type') as WordType,
+        levels: formData.getAll('levels') as LanguageProficienyLevel[]
       }
       if (data) {
         await updatedVocabulary(data.vocab_id, payload);
@@ -118,7 +113,7 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
 
   return <>
     <article>
-      <form className="p-4" onSubmit={submit}>
+      <form className="p-4" onSubmit={submitAction}>
         <fieldset className={fieldSetClasses}>
           <legend className="py-5 text-xl font-semibold">Basic data (Mandatory)</legend>
           <div>
@@ -126,8 +121,9 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
             <input
               className={inputClasses}
               type="text"
-              defaultValue={word}
-              onChange={(e) => setWord(e.target.value)}
+              defaultValue={data?.word || ''}
+              name="word"
+              required
             />
           </div>
           <div className="mt-5">
@@ -135,21 +131,35 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
             <input
               className={inputClasses}
               type="text"
-              defaultValue={translation}
-              onChange={(e) => setTranslation(e.target.value)}
+              defaultValue={data?.english_translation || ''}
+              name="translation"
+              required
             />
           </div>
           <div className="mt-5">
             <label className="block font-semibold">Word type</label>
-            <select className={inputClasses} style={{minWidth: '195px'}} onChange={(e) => setGender(e.target.value)}>
-              {Object.keys(WordType).map(aType => <option value={(WordType as Record<string, string>)[aType]}>{aType}</option>)}
+            <select className={inputClasses} style={{minWidth: '195px'}} name="word_type" defaultValue={data?.word_type || ''}>
+              {Object.keys(WordType).map(aType => <option value={(WordType as Record<string, string>)[aType]} key={aType}>{aType}</option>)}
             </select>
           </div>
           <div className="mt-5">
             <label className="block font-semibold">Gender</label>
-            <select className={inputClasses} style={{minWidth: '195px'}} onChange={(e) => setGender(e.target.value)}>
+            <select className={inputClasses} style={{minWidth: '195px'}} name="gender" defaultValue={data?.gender || ''}>
               <option value="">None</option>
-              {Object.keys(Gender).map(aGender => <option value={Gender[aGender]}>{aGender}</option>)}
+              {Object.keys(Gender).map(aGender => <option value={Gender[aGender]} key={aGender}>{aGender}</option>)}
+            </select>
+          </div>
+          <div className="mt-5">
+            <label className="block font-semibold">Levels</label>
+            <select 
+              multiple 
+              className={inputClasses}
+              style={{minWidth: '195px'}}
+              defaultValue={data?.levels || []}
+              name="levels"
+              required
+            >
+              {Object.values(LanguageProficienyLevel).map(level => <option value={level} key={level}>{level}</option>)}
             </select>
           </div>
         </fieldset>

@@ -107,7 +107,7 @@ async def generate_vocab(lang: str, session: SessionDep):
 
     list = []
     for item in rawList:
-        simpleV = item.model_dump(exclude={'vocab_id', 'language'})
+        simpleV = item.model_dump(exclude={'language'})
         list.append(simpleV)
 
     with open(fileName, 'w', encoding='utf-8') as f:
@@ -118,6 +118,5 @@ async def generate_vocab(lang: str, session: SessionDep):
 async def get_vocab_by_id(vocab_id, session: SessionDep):
     db_vocab = session.get(Vocab, vocab_id)
     if not db_vocab:
-        print('comes here for a wierd reason')
         raise HTTPException(status_code=404, detail='Not found')
     return db_vocab

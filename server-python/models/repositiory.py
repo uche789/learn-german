@@ -12,6 +12,7 @@ class VocabBase(SQLModel):
     language: str = Field(schema_extra={'pattern': '^(de|fr|jp)$'})
     word_type: str
     gender: str | None = Field(default=None, schema_extra={'pattern': '^(f|m|n|p)$'})
+    levels: List[str] | None = Field(sa_column=Column(JSON))
 
 class Vocab(VocabBase, table=True):
     vocab_id: int | None = Field(default=None, primary_key=True)

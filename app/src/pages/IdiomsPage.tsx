@@ -1,5 +1,6 @@
 import TopicList from "@/components/topicList/TopicList";
 import { GlobalContext } from "@/context/global";
+import HeadingText from "@/features/layout/components/Heading";
 import { getIdiomsCollection } from "@/lib/api/api";
 import categories from "@/lib/categories";
 import { AppLanguage, IdiomBase, SupportedLanguages, Topic } from "@/lib/types";
@@ -22,12 +23,11 @@ export default function Idioms() {
         setLoading(false)
       }
     }
-    if (!loading) {
-      fetchData()
-    }
+    fetchData()
   }, [state])
 
-  return <div>
+  return <article>
+    <HeadingText>Idioms</HeadingText>
     {!!idioms.length && <TopicList topics={idioms} language={state.levelLanguage} />}
-  </div>;
+  </article>;
 }

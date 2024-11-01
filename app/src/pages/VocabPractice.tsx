@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import dictionary from "@/assets/english-german.json";
 import Card from "@/features/card/Card";
 import Switcher from "@/features/switcher/Switcher";
+import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
 
-export default function Vocab() {
+export default function VocabularyPractice() {
   const params = useParams()
   
   function getRandomInt(max: number) {
@@ -30,6 +31,7 @@ export default function Vocab() {
     setWord(getRandonWord());
   };
   return <div>
+    <BackPreviousPage text="practice" />
     <Card word={word} />
     <Switcher onSwitch={onSwitch} />
   </div>;

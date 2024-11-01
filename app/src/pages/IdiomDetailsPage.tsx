@@ -1,3 +1,4 @@
+import HeadingText from "@/features/layout/components/Heading";
 import { getIdiom } from "@/lib/api/api";
 import { Idiom } from "@/lib/types";
 import { useEffect, useState } from "react";
@@ -20,9 +21,9 @@ export default function () {
     return (
         <div>{idiom &&
             <>
-                <h1>{idiom.idiom}</h1>
+                <HeadingText>{idiom.idiom}</HeadingText>
                 <div dangerouslySetInnerHTML={{__html: idiom.meaning}} />
-                <h2>Examples</h2>
+                <h2 className="font-semibold text-xl my-4">Examples</h2>
                 <div dangerouslySetInnerHTML={{__html: idiom.examples}} />
             </>
         }

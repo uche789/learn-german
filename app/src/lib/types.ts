@@ -31,9 +31,11 @@ export enum IconType {
   Japanese = AppLanguage.Japanese,
   German = AppLanguage.German,
   French = AppLanguage.French,
-  Learn = "Learn",
   Practice = "Practice",
   ArrowLeft = "ArrowLeft",
+  Grammar = "Grammar",
+  Vocabulary = "Vocabulary",
+  Idioms = "Idioms",
 }
 
 export type ButtonVariant = "primary" | "secondary" | "correct" | "wrong";

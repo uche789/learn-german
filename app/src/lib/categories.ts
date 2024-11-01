@@ -1,4 +1,4 @@
-const categories = {
+const categories: Record<'grammar' | 'language levels' | 'languages', Record<string, string>> = {
   "grammar": {
     "Cases": "19rEsNPuT9KjBZk0T4d3Oz",
     "Nouns": "4CzbSrnYkCxEwCtMbSDocq",

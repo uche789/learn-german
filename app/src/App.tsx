@@ -3,12 +3,13 @@ import "./App.css";
 import Layout from "./features/layout/components/Layout";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
-import Practice from "@/pages/practice";
-import Learn from "@/pages/learn";
-import Idioms from "@/pages/idioms";
-import Idiom from "@/pages/idiom";
-import Grammar from "@/pages/GrammarPage";
-import Vocab from "@/pages/vocab";
+import PracticePage from "@/pages/PracticePage";
+import GrammarPage from "@/pages/GrammarPage";
+import IdiomsPage from "@/pages/IdiomsPage";
+import IdiomDetailsPage from "@/pages/IdiomDetailsPage";
+import GrammarDetailsPage from "@/pages/GrammarDetailsPage";
+import VocabularyPage from "@/pages/VocabularyPage";
+import VocabularyDetailsPage from "@/pages/VocabularyDetailsPage";
 import VocabPractice from "@/pages/VocabPractice";
 import GlobalStateProvider from "./context/global";
 import VocabAmin from "./pages/VocabAdmin";
@@ -36,14 +37,15 @@ const App: React.FC = () => {
               </GlobalStateProvider>
             }
           >
-            <Route index element={<Learn />} />
-            <Route path="/:lang/practice" element={<Practice />} />
-            <Route path="/:lang/learn" element={<Learn />} />
-            <Route path="/:lang/idioms" element={<Idioms />} />
-            <Route path="/:lang/idiom/:slug" element={<Idiom />} />
-            <Route path="/:lang/grammar/:slug" element={<Grammar />} />
-            <Route path="/:lang/vocabulary/" element={<Vocab />} />
-            <Route path="/:lang/vocabulary/:slug" element={<VocabPractice />} />
+            <Route index element={<GrammarPage />} />
+            <Route path="/:lang/practice" element={<PracticePage />} />
+            <Route path="/:lang/practice/vocabulary" element={<VocabPractice />} />
+            <Route path="/:lang/grammar" element={<GrammarPage />} />
+            <Route path="/:lang/idioms" element={<IdiomsPage />} />
+            <Route path="/:lang/idiom/:slug" element={<IdiomDetailsPage />} />
+            <Route path="/:lang/grammar/:slug" element={<GrammarDetailsPage />} />
+            <Route path="/:lang/vocabulary/" element={<VocabularyPage />} />
+            <Route path="/:lang/vocabulary/:slug" element={<VocabularyDetailsPage />} />
           </Route>
           <Route path="/admin" element={<VocabAmin />}/>
           <Route path="/admin/vocab/form" element={<VocabFormAdmin />}/>

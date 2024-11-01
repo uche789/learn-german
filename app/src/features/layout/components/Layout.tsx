@@ -9,6 +9,7 @@ import AppHeader from "./app-header/AppHeader";
 import AppNav from "./app-nav/AppNav";
 import DropDownMenu from "@/components/dropdown/dropdown";
 import { GlobalActionType, GlobalDispatch } from "@/context/global";
+import AppFooter from "./app-footer/AppFooter";
 
 export default function Layout() {
   const params = useParams();
@@ -27,8 +28,7 @@ export default function Layout() {
   return (supportedLanguages as string[]).includes(params?.lang || "") ? (
     <>
       <AppHeader />
-      <main className="max-w-screen-lg w-full px-4 m-auto pt-24">
-        <AppNav />
+      <main className="max-w-screen-md w-full px-4 m-auto pt-24">
         <Outlet />
         <div className="wrapper">
           <SelectItem
@@ -39,6 +39,7 @@ export default function Layout() {
           />
         </div>
       </main>
+      <AppFooter />
     </>
   ) : (
     <Navigate to="/error" replace />

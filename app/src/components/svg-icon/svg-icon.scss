@@ -1,4 +1,9 @@
 .svg-icon {
+  &.is-current-color {
+    svg {
+      fill: currentColor;
+    }
+  }
   svg {
     width: auto;
     height: inherit;

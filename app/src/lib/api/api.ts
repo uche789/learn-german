@@ -30,8 +30,8 @@ async function fetchData(query: string) {
   }
 }
 
-export const getPostCollection = async (ids: string[], langCode: SupportedLanguages, language: AppLanguage) => {
-  const query = postCollectionQuery([...ids, categories.languages[language]]);
+export const getPostCollection = async (ids: string[], langCode: SupportedLanguages) => {
+  const query = postCollectionQuery(ids);
   const { data, error } = await fetchData(query);
 
   if (error) {

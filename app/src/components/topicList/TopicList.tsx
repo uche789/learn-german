@@ -13,7 +13,7 @@ export default function TopicList({ topics, language }: { topics: Topic[], langu
         <li>
           {topics.map((topic) =>
             <Link to={topic.to} key={topic.id}>
-              <div className="px-8 py-4 border-gray-200 border rounded-xl shadow-md hover:bg-grey-100 sm:w-full md:w-3/4">
+              <div className="px-8 py-4 border-gray-200 border rounded-xl shadow-md hover:bg-grey-100 w-full">
                 <LessonType lessonType={topic.lessonType} />
                 <strong dangerouslySetInnerHTML={{__html: topic.title}}/>
                 {

@@ -7,7 +7,7 @@ export default function BackPreviousPage({ text, link }: { text?: string, link?:
   return <div className="mb-4">
     <button className="hidden sm:flex items-center" onClick={() => link ? navigate(link) : navigate(-1)}>
       <SvgIcon aria-hidden="true" name={IconType.ArrowLeft} />
-      <span className="ps-1">Go back{!!text && ` ${text}`}</span>
+      <span className="ps-1">Go back{!!text && ` to ${text}`}</span>
     </button>
   </div>
 }

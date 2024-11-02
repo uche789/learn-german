@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { getVocabulary } from "../lib/api"
-import { AdminVocabulary, SupportedLanguages } from "@/lib/types"
+import { VocabularyType, SupportedLanguages } from "@/lib/types"
 import { Link } from "react-router-dom"
 
-export default function AdminViewer({ vocabulary, lang }: { vocabulary: AdminVocabulary[], lang: SupportedLanguages}) {
+export default function AdminViewer({ vocabulary, lang }: { vocabulary: VocabularyType[], lang: SupportedLanguages}) {
   return <div>
       {
         vocabulary.map((vocab) =>

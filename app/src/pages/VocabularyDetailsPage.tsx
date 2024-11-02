@@ -1,23 +1,14 @@
 import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
-import Heading from "@/features/layout/components/Heading";
-import { getFile, getVocab } from "@/features/vocabulary/lib/api";
-import { AdminVocabulary } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useSingleVocabularyQuery } from "@/lib/api";
 import { useParams } from "react-router-dom";
 
 export default function VocabularyDetailsPage() {
-  const [data, setData] = useState<AdminVocabulary>()
-  const params = useParams()
+  const params = useParams();
+  const slug = params.slug?.split('_')[1] || '';
+  const { data, isLoading, error } = useSingleVocabularyQuery(slug, params.lang || 'de')
 
-  useEffect(() => {
-    async function fetchData() {
-      const slug = params.slug?.split('_')[1] || '';
-      const result = await getVocab(slug, params.lang || 'de');
-      setData(result);
-    }
-
-    fetchData()
-  }, [])
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading vocabulary</div>;
 
   return (
     <div>

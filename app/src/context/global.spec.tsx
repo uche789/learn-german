@@ -5,6 +5,7 @@ import GlobalStateProvider, {
   GlobalDispatch,
   GlobalActionType,
 } from "./global";
+import { ErrorBoundary } from "react-error-boundary";
 
 describe("GlobalStateProvider", () => {
   const TestComponent = () => {
@@ -14,6 +15,7 @@ describe("GlobalStateProvider", () => {
     return (
       <div>
         <p data-testid="lang">{state.langCode}</p>
+        <p data-testid="language">{state.language}</p>
         <button
           onClick={() =>
             dispatch({
@@ -22,13 +24,13 @@ describe("GlobalStateProvider", () => {
             })
           }
         >
-          <span data-testid="language">Set {state.language}</span>
+          <span data-testid="set-language">Set Language</span>
         </button>
       </div>
     );
   };
 
-  it.only("should provide initial state", () => {
+  it("should provide initial state", () => {
     const { getByTestId } = render(
       <GlobalStateProvider>
         <TestComponent />
@@ -46,9 +48,10 @@ describe("GlobalStateProvider", () => {
       </GlobalStateProvider>
     );
 
-    fireEvent.click(getByText("Set French"));
+    fireEvent.click(getByText("Set Language"));
 
-    expect(getByTestId("lang")).toHaveTextContent("en");
+    expect(getByTestId("lang")).toHaveTextContent("fr");
+    expect(getByTestId("language")).toHaveTextContent("French");
   });
 
   /**
@@ -75,7 +78,9 @@ describe("GlobalStateProvider", () => {
     expect(() =>
       render(
         <GlobalStateProvider>
+          <ErrorBoundary fallback={<p>Something went wrong!</p>}>
           <InvalidActionComponent />
+          </ErrorBoundary>
         </GlobalStateProvider>
       )
     ).toThrow("Invalid Action");

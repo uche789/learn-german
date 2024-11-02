@@ -2,7 +2,7 @@ import SwitchLang from "@/features/admin/components/SwitchLang";
 import VocabFileUpload from "@/features/admin/components/VocabFileUpload";
 import VocabForm from "@/features/admin/components/VocabForm";
 import { getVocabularyById } from "@/features/admin/lib/api";
-import { AdminVocabulary, SupportedLanguages } from "@/lib/types";
+import { VocabularyType, SupportedLanguages } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export default function VocabFormAmin() {
   const [lang, setLang] = useState<SupportedLanguages>('de')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<AdminVocabulary>()
+  const [data, setData] = useState<VocabularyType>()
   const [searchParams] = useSearchParams()
 
   useEffect(() => {

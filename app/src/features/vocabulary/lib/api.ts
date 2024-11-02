@@ -1,5 +1,5 @@
 import NotFound from "@/lib/api/errors/NotFound";
-import { AdminVocabulary, SupportedLanguages, Topic } from "@/lib/types";
+import { VocabularyType, SupportedLanguages, Topic } from "@/lib/types";
 
 export const getFile = async (langCode: string) => {
   const response = await fetch(`/${langCode}.json`, {
@@ -20,7 +20,7 @@ export const getTopics = async (langCode: string): Promise<Topic[]> => {
   const data = await getFile(langCode);
   const topics: Topic[] = [];
 
-  (data as AdminVocabulary[]).forEach((vocab) => {
+  (data as VocabularyType[]).forEach((vocab) => {
     topics.push({
       to: `/${langCode}/vocabulary/${vocab.word_type}_${vocab.word}`,
       id: String(vocab.vocab_id),
@@ -33,8 +33,8 @@ export const getTopics = async (langCode: string): Promise<Topic[]> => {
   return topics;
 }
 
-export const getVocab = async (word: string, langCode: string): Promise<AdminVocabulary | voic> => {
+export const getVocab = async (word: string, langCode: string): Promise<VocabularyType | void> => {
   const result = await getFile(langCode);
 
-  return (result as AdminVocabulary[]).find(r => r.word === word);
+  return (result as VocabularyType[]).find(r => r.word === word);
 }

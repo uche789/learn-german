@@ -1,27 +1,19 @@
 import Heading from "@/features/layout/components/Heading";
-import { getIdiom, getPost } from "@/lib/api/api";
-import { Idiom, Post } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useGrammarQuery } from "@/lib/api";
+import getLangConfig from "@/lib/langConfig";
 import { useParams } from "react-router-dom";
 
 export default function SingleGrammar() {
-    const param = useParams();
-    const [post, setPost] = useState<Post>();
+    const params = useParams();
+    const {data, isLoading, error} = useGrammarQuery(params.slug || '', getLangConfig(params.lang).language)
 
-    useEffect(() => {
-        async function fetchData() {
-            if (param.slug) {
-                const result = await getPost(param.slug);
-                setPost(result)
-            }
-        }
-        fetchData();
-    }, [])
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading grammar</div>;
 
     return (
-        <div>{post &&
+        <div>{data &&
             <>
-                <Heading>{post.title}</Heading>
+                <Heading>{data.title}</Heading>
             </>
         }
         </div>

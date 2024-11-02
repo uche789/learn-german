@@ -1,29 +1,41 @@
 import TopicList from "@/components/topicList/TopicList";
-import { GlobalContext } from "@/context/global";
 import Heading from "@/features/layout/components/Heading";
-import { getFile, getTopics } from "@/features/vocabulary/lib/api";
-import { AdminVocabulary, LanguageProficienyLevel, Topic } from "@/lib/types";
-import { useContext, useEffect, useState } from "react";
+import { useVocabularyQuery } from "@/lib/api";
+import getLangConfig from "@/lib/langConfig";
+import { Topic } from "@/lib/types";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function VocabularyPage() {
-  const state = useContext(GlobalContext);
   const [query, setQuery] = useState('')
-  const [data, setData] = useState<Topic[]>([])
   const params = useParams()
+  const { data, isLoading, error, refetch } = useVocabularyQuery(getLangConfig(params.lang).langCode)
+  const topics = useMemo(() => {
+    const temp: Topic[] = []
+    data?.forEach((vocab) => {
+      if (!query
+          || vocab.english_translation.toLowerCase().includes(query.toLowerCase())
+          || vocab.word.toLowerCase().includes(query.toLowerCase())
+        ) {
+        temp.push({
+          to: `/${getLangConfig(params.lang).langCode}/vocabulary/${vocab.word_type}_${vocab.word}`,
+          id: String(vocab.vocab_id),
+          lessonType: "",
+          title: vocab.word,
+          subTitle: vocab.english_translation,
+          levels: new Set(vocab.levels)
+        })
+      }
+    })
+    return temp;
+  }, [data, query])
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setData([]);
-        const result = await getTopics(state.langCode);
-        setData(result);
-      } catch {
-      }
-    }
+    refetch()
+  }, [params])
 
-    fetchData()
-  }, [state.langCode, query])
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading vocabulary</div>;
 
   return <div>
     <Heading>Vocabulary</Heading>
@@ -35,7 +47,8 @@ export default function VocabularyPage() {
         onChange={(e) => setQuery(e.target.value)}
       />
     </div>
-    <TopicList topics={data} language={state.levelLanguage} />
+    {}
+    <TopicList topics={topics} language={getLangConfig(params.lang).levelLanguage} />
   </div>;
 }
 

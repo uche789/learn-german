@@ -1,59 +1,48 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Card from "@/features/card/Card";
 import Switcher from "@/features/switcher/Switcher";
 import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
 import { GlobalContext } from "@/context/global";
-import { getTopics } from "@/features/vocabulary/lib/api";
-import { Topic, VocabularyWithTranslation } from "@/lib/types";
+import { VocabularyType, VocabularyWithTranslation } from "@/lib/types";
+import { useVocabularyQuery } from "@/lib/api";
+import getLangConfig from "@/lib/langConfig";
 
 export default function VocabularyPractice() {
   const params = useParams()
-  const [dictionary, setDictionary] = useState<Topic[]>([]);
-  const [loading, setLoading] = useState(true);
   const state = useContext(GlobalContext);
   const [word, setWord] = React.useState<VocabularyWithTranslation>();
+  const { data, isLoading, error, refetch } = useVocabularyQuery(getLangConfig(params.lang).langCode)
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const result = await getTopics(state.langCode);
-        setDictionary(result);
-        setWord(getRandonWord(result))
-      } catch (ex) {
-        console.error(ex)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [state.langCode])
+    refetch().then((result) => {
+      getRandonWord(result.data)
+    })
+  }, [params])
   
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  const getRandonWord = (result?: Topic[]) => {
-    const tempDictionay = (result || dictionary)
+  const getRandonWord = (result?: VocabularyType[]) => {
+    const tempDictionay = (result || data || [])
     const index = getRandomInt(tempDictionay.length);
     const newWord: VocabularyWithTranslation = {
-      word: tempDictionay[index].title,
-      translation: tempDictionay[index].subTitle || '',
+      word: tempDictionay[index].word,
+      translation: tempDictionay[index].english_translation,
       language: state.langCode,
     };
-    return newWord;
+    setWord(newWord)
   };
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading practice for vocabulary</div>;
 
-  const onSwitch = () => {
-    setWord(getRandonWord());
-  };
   return <div>
-    {!loading && word && <>
+    {word && <>
       <BackPreviousPage text="practice" link={`/${state.langCode}/practice`} />
       <Card word={word} />
-      <Switcher onSwitch={onSwitch} />
+      <Switcher onSwitch={() => getRandonWord()} />
     </>}
   </div>;
 }

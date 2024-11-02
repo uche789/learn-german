@@ -65,7 +65,7 @@ export const Gender: Readonly<Record<string, string>> = Object.freeze({
   Plural: "p",
 })
 
-export type AdminVocabulary = {
+export type VocabularyType = {
   vocab_id: number;
   definition: string[];
   examples: string[];

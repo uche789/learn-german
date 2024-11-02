@@ -48,8 +48,16 @@ export const idiomsCollectionQuery = (conceptIds: string[]) => `query idiomsColl
   }
 }`
 
-export const idiomQuery = (slug: string) => `query idiomsCollectionQuery {
-  idiomsCollection (limit: 1, where: { slug: "${slug}"}) {
+export const idiomQuery = (slug: string, languageId: string) => `query idiomsCollectionQuery {
+  idiomsCollection (limit: 1, where: {
+      slug: "${slug}",
+      contentfulMetadata: {
+        concepts_exists: true
+        concepts: {
+          id_contains_all: ["${languageId}"]
+        }
+      }
+    }) {
     items {
       idiom
       meaning
@@ -63,8 +71,16 @@ export const idiomQuery = (slug: string) => `query idiomsCollectionQuery {
   }
 }`
 
-export const postQuery = (slug: string) => `query postCollectionQuery {
-  postCollection (limit: 1, where: { slug: "${slug}"}) {
+export const postQuery = (slug: string, languageId: string) => `query postCollectionQuery {
+  postCollection (limit: 1, where: {
+      slug: "${slug}"
+      contentfulMetadata: {
+        concepts_exists: true
+        concepts: {
+          id_contains_all: ["${languageId}"]
+        }
+      }
+    }) {
     items {
       title
       contentfulMetadata {

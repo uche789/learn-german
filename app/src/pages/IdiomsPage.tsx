@@ -1,33 +1,29 @@
 import TopicList from "@/components/topicList/TopicList";
-import { GlobalContext } from "@/context/global";
 import HeadingText from "@/features/layout/components/Heading";
-import { getIdiomsCollection } from "@/lib/api/api";
+import { useIdiomCollectionQuery } from "@/lib/api";
 import categories from "@/lib/categories";
-import { AppLanguage, IdiomBase, SupportedLanguages, Topic } from "@/lib/types";
-import { useContext, useEffect, useState } from "react";
+import getLangConfig from "@/lib/langConfig";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export default function Idioms() {
-  const state = useContext(GlobalContext);
-  const [loading, setLoading] = useState(false)
-  const [idioms, setIdioms] = useState<Topic[]>([])
+  const params = useParams()
+  const {data, isLoading, error, refetch} = useIdiomCollectionQuery(
+    [categories.languages[getLangConfig(params.lang).language]],
+    getLangConfig(params.lang).langCode,
+    getLangConfig(params.lang).language,
+  )
+
   
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const result = await getIdiomsCollection([categories.languages[state.language]], state.langCode, state.language);
-        setIdioms(result);
-      } catch (error) {
-        // set error here
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchData()
-  }, [state])
+    refetch()
+  }, [params])
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading idioms</div>;
 
   return <article>
     <HeadingText>Idioms</HeadingText>
-    {!!idioms.length && <TopicList topics={idioms} language={state.levelLanguage} />}
+    {!!data?.length && <TopicList topics={data} language={getLangConfig(params.lang).levelLanguage} />}
   </article>;
 }

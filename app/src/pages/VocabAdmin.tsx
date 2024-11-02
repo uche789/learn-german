@@ -1,13 +1,13 @@
 import AdminViewer from "@/features/admin/components/AdminViewer";
 import SwitchLang from "@/features/admin/components/SwitchLang";
 import { getVocabulary } from "@/features/admin/lib/api";
-import { AdminVocabulary, SupportedLanguages } from "@/lib/types";
+import { VocabularyType, SupportedLanguages } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function VocabAmin() {
   const [lang, setLang] = useState<SupportedLanguages>('de')
-  const [data, setData] = useState<AdminVocabulary[]>([])
+  const [data, setData] = useState<VocabularyType[]>([])
   const [error, setError] = useState(false)
   const [query, setQuery] = useState('')
 

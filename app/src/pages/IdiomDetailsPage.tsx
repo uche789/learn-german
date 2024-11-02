@@ -1,30 +1,25 @@
 import HeadingText from "@/features/layout/components/Heading";
-import { getIdiom } from "@/lib/api/api";
+import { getIdiom, useIdiomQuery } from "@/lib/api";
+import getLangConfig from "@/lib/langConfig";
 import { Idiom } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function () {
-    const param = useParams();
+    const params = useParams();
     const [idiom, setIdiom] = useState<Idiom>();
+    const { data, isLoading, error } = useIdiomQuery(params.slug || '', getLangConfig(params.lang).language)
 
-    useEffect(() => {
-        async function fetchData() {
-            if (param.slug) {
-                const result = await getIdiom(param.slug);
-                setIdiom(result)
-            }
-        }
-        fetchData();
-    }, [])
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading Idiom</div>;
 
     return (
-        <div>{idiom &&
+        <div>{data &&
             <>
-                <HeadingText>{idiom.idiom}</HeadingText>
-                <div dangerouslySetInnerHTML={{__html: idiom.meaning}} />
+                <HeadingText>{data.idiom}</HeadingText>
+                <div dangerouslySetInnerHTML={{__html: data.meaning}} />
                 <h2 className="font-semibold text-xl my-4">Examples</h2>
-                <div dangerouslySetInnerHTML={{__html: idiom.examples}} />
+                <div dangerouslySetInnerHTML={{__html: data.examples}} />
             </>
         }
         </div>

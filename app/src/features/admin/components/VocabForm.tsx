@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, FormEvent, FormEventHandler, FormHTMLAttributes, useEffect, useState } from "react"
 import { addVocabulary, deleteVocabulary, updatedVocabulary, } from "../lib/api"
-import { AdminVocabulary, Gender, LanguageProficienyLevel, SupportedLanguages, WordType } from "@/lib/types"
+import { VocabularyType, Gender, LanguageProficienyLevel, SupportedLanguages, WordType } from "@/lib/types"
 import { useNavigate } from "react-router-dom"
 import { finalization, title } from "process"
 
@@ -11,7 +11,7 @@ type TextAreaContent = {
 
 const getDefaultTextAreaContent = (): TextAreaContent => ({ id: crypto.randomUUID(), value: ''});
 
-export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabulary, lang?: SupportedLanguages}) {
+export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType, lang?: SupportedLanguages}) {
   const navigate = useNavigate();
   const [definitions, setDefinitions] = useState<TextAreaContent[]>([getDefaultTextAreaContent()])
   const [examples, setExamples] = useState<TextAreaContent[]>([getDefaultTextAreaContent()])
@@ -71,7 +71,7 @@ export default function VocabForm({ data, lang = 'de' }: { data?: AdminVocabular
     formEvent.preventDefault()
     try {
       const formData = new FormData(formEvent.currentTarget)
-      const payload: Omit<AdminVocabulary, 'vocab_id'> = {
+      const payload: Omit<VocabularyType, 'vocab_id'> = {
         definition: definitions.map(d => d.value).filter(val => !!val),
         examples: examples.map(e => e.value).filter(val => !!val),
         english_translation: formData.get('translation') as string,

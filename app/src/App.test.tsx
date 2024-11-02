@@ -2,7 +2,12 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", async () => {
+jest.mock('@/lib/config', () => ({
+  spaceId: 'test',
+  accessToken: 'test'
+}));
+
+test("renders APP", async () => {
   render(<App />);
   const linkElement = await waitFor(() => screen.getByText(/STUDY MORE/i));
   expect(linkElement).toBeInTheDocument();

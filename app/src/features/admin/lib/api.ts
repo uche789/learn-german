@@ -1,4 +1,4 @@
-import { AdminVocabulary } from "@/lib/types";
+import { VocabularyType } from "@/lib/types";
 
 export const getVocabulary = async (lang: string, query?: string) => {
     const queryParam = query ? `&query=${query}` : ''
@@ -33,7 +33,7 @@ export const deleteVocabulary = async (id: number) => {
     return body;
 }
 
-export const addVocabulary = async (payload: Omit<AdminVocabulary, 'vocab_id'>) => {
+export const addVocabulary = async (payload: Omit<VocabularyType, 'vocab_id'>) => {
     const request = await fetch(`http://localhost:8000/vocabulary`, {
         method: 'post',
         body: JSON.stringify(payload),
@@ -50,7 +50,7 @@ export const addVocabulary = async (payload: Omit<AdminVocabulary, 'vocab_id'>) 
     return body;
 }
 
-export const updatedVocabulary = async (vocab_id: number, payload: Omit<AdminVocabulary, 'vocab_id'>) => {
+export const updatedVocabulary = async (vocab_id: number, payload: Omit<VocabularyType, 'vocab_id'>) => {
     const request = await fetch(`http://localhost:8000/vocabulary/${vocab_id}`, {
         method: 'put',
         body: JSON.stringify(payload),

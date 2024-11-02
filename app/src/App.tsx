@@ -14,40 +14,45 @@ import VocabPractice from "@/pages/VocabPractice";
 import GlobalStateProvider from "./context/global";
 import VocabAmin from "./pages/VocabAdmin";
 import VocabFormAdmin from "./pages/VocabFormAdmin";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient()
 
 const App: React.FC = () => {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          {/* Default route redirects to /en or any default language */}
-          <Route path="/" element={<Navigate to="/de" />} />
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            {/* Default route redirects to /en or any default language */}
+            <Route path="/" element={<Navigate to="/de" />} />
 
-          {/* Dynamic route that handles /:lang */}
-          <Route
-            path="/:lang"
-            element={
-              <GlobalStateProvider>
-                <Layout />
-              </GlobalStateProvider>
-            }
-          >
-            <Route index element={<GrammarPage />} />
-            <Route path="/:lang/practice" element={<PracticePage />} />
-            <Route path="/:lang/practice/vocabulary" element={<VocabPractice />} />
-            <Route path="/:lang/grammar" element={<GrammarPage />} />
-            <Route path="/:lang/idioms" element={<IdiomsPage />} />
-            <Route path="/:lang/idiom/:slug" element={<IdiomDetailsPage />} />
-            <Route path="/:lang/grammar/:slug" element={<GrammarDetailsPage />} />
-            <Route path="/:lang/vocabulary/" element={<VocabularyPage />} />
-            <Route path="/:lang/vocabulary/:slug" element={<VocabularyDetailsPage />} />
-          </Route>
-          <Route path="/admin" element={<VocabAmin />}/>
-          <Route path="/admin/vocab/form" element={<VocabFormAdmin />}/>
-          <Route path="*" element={<ErrorPage />} />
-          <Route path="/error" element={<ErrorPage />} />
-        </Routes>
-      </BrowserRouter>
+            {/* Dynamic route that handles /:lang */}
+            <Route
+              path="/:lang"
+              element={
+                <GlobalStateProvider>
+                  <Layout />
+                </GlobalStateProvider>
+              }
+            >
+              <Route index element={<GrammarPage />} />
+              <Route path="/:lang/practice" element={<PracticePage />} />
+              <Route path="/:lang/practice/vocabulary" element={<VocabPractice />} />
+              <Route path="/:lang/grammar" element={<GrammarPage />} />
+              <Route path="/:lang/idioms" element={<IdiomsPage />} />
+              <Route path="/:lang/idiom/:slug" element={<IdiomDetailsPage />} />
+              <Route path="/:lang/grammar/:slug" element={<GrammarDetailsPage />} />
+              <Route path="/:lang/vocabulary/" element={<VocabularyPage />} />
+              <Route path="/:lang/vocabulary/:slug" element={<VocabularyDetailsPage />} />
+            </Route>
+            <Route path="/admin" element={<VocabAmin />} />
+            <Route path="/admin/vocab/form" element={<VocabFormAdmin />} />
+            <Route path="*" element={<ErrorPage />} />
+            <Route path="/error" element={<ErrorPage />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </>
   );
 };

@@ -1,10 +1,12 @@
+import Loading from "@/components/Loading";
 import TopicList from "@/components/topicList/TopicList";
-import Heading from "@/features/layout/components/Heading";
+import Heading from "@/components/Heading";
 import { useVocabularyQuery } from "@/lib/api";
 import getLangConfig from "@/lib/langConfig";
 import { Topic } from "@/lib/types";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import ErrorText from "@/components/ErrorText";
 
 export default function VocabularyPage() {
   const [query, setQuery] = useState('')
@@ -34,8 +36,8 @@ export default function VocabularyPage() {
     refetch()
   }, [params])
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading vocabulary</div>;
+  if (isLoading) return <Loading />
+  if (error) return <ErrorText text="vocabulary" />
 
   return <div>
     <Heading>Vocabulary</Heading>

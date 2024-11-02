@@ -1,3 +1,5 @@
+import ErrorText from "@/components/ErrorText";
+import Loading from "@/components/Loading";
 import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
 import { useSingleVocabularyQuery } from "@/lib/api";
 import { useParams } from "react-router-dom";
@@ -7,8 +9,8 @@ export default function VocabularyDetailsPage() {
   const slug = params.slug?.split('_')[1] || '';
   const { data, isLoading, error } = useSingleVocabularyQuery(slug, params.lang || 'de')
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading vocabulary</div>;
+  if (isLoading) return <Loading />
+  if (error) return <ErrorText text="vocabulary" />
 
   return (
     <div>

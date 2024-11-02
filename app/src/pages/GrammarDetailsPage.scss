@@ -1,0 +1,9 @@
+.grammar-details {
+  ol,
+  table,
+  ul {
+    p {
+      @apply p-0 m-0;
+    }
+  }
+}

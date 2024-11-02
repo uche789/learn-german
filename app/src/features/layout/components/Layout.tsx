@@ -20,7 +20,7 @@ export default function Layout() {
   return (supportedLanguages as string[]).includes(params?.lang || "") ? (
     <>
       <AppHeader />
-      <main className="max-w-screen-md w-full px-4 m-auto pt-24">
+      <main className="max-w-screen-md w-full px-4 m-auto pt-24 pb-24">
         <Outlet />
         <div className="wrapper">
           <SelectItem

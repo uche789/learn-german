@@ -83,6 +83,9 @@ export const postQuery = (slug: string, languageId: string) => `query postCollec
     }) {
     items {
       title
+      content {
+        json
+      }
       contentfulMetadata {
         concepts {
           id

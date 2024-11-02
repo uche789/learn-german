@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Card from "@/features/card/Card";
-import Switcher from "@/features/switcher/Switcher";
+import Card from "@/features/vocabulary/components/card/Card";
+import Switcher from "@/features/vocabulary/components/switcher/Switcher";
 import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
 import { GlobalContext } from "@/context/global";
 import { VocabularyType, VocabularyWithTranslation } from "@/lib/types";
 import { useVocabularyQuery } from "@/lib/api";
 import getLangConfig from "@/lib/langConfig";
+import Loading from "@/components/Loading";
+import ErrorText from "@/components/ErrorText";
 
 export default function VocabularyPractice() {
   const params = useParams()
@@ -34,9 +36,8 @@ export default function VocabularyPractice() {
     };
     setWord(newWord)
   };
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading practice for vocabulary</div>;
+  if (isLoading) return <Loading />
+  if (error) return <ErrorText text="practice for vocabulary" />
 
   return <div>
     {word && <>

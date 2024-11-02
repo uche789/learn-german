@@ -6,6 +6,8 @@ import { useGrammarCollectionQuery } from "@/lib/api";
 import GrammarType from "@/features/grammar/components/GrammarType";
 import { useParams, useSearchParams } from "react-router-dom";
 import getLangConfig from "@/lib/langConfig";
+import Loading from "@/components/Loading";
+import ErrorText from "@/components/ErrorText";
 
 export default function Practice() {
   const [ searchParams ] = useSearchParams();
@@ -22,8 +24,8 @@ export default function Practice() {
     refetch()
   }, [params, searchParams])
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading grammar list</div>;
+  if (isLoading) return <Loading />
+  if (error) return <ErrorText text="grammar list" />
 
   return <article>
     <div className="mb-8">

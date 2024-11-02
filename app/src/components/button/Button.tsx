@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, ReactNode } from "react";
-import "./app-button.scss";
+import "./Button.scss";
 import { ButtonVariant } from "@/lib/types";
 
 type ButtonProps = {
@@ -9,7 +9,7 @@ type ButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-const button: FC<ButtonProps> = (props) => {
+const Button: FC<ButtonProps> = (props) => {
   const variant = props.variant || "primary";
   const isDisabled = props.isDisabled || false;
   const className = `btn btn--${variant}`;
@@ -26,4 +26,4 @@ const button: FC<ButtonProps> = (props) => {
   );
 };
 
-export default button;
+export default Button;

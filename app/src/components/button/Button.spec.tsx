@@ -1,5 +1,5 @@
 import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
-import Component from "./app-button";
+import Component from "./Button";
 import userEvent from "@testing-library/user-event";
 
 describe("[Base component]", () => {

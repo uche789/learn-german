@@ -1,10 +1,12 @@
 import TopicList from "@/components/topicList/TopicList";
-import HeadingText from "@/features/layout/components/Heading";
+import HeadingText from "@/components/Heading";
 import { useIdiomCollectionQuery } from "@/lib/api";
 import categories from "@/lib/categories";
 import getLangConfig from "@/lib/langConfig";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ErrorText from "@/components/ErrorText";
+import Loading from "@/components/Loading";
 
 export default function Idioms() {
   const params = useParams()
@@ -19,8 +21,8 @@ export default function Idioms() {
     refetch()
   }, [params])
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading idioms</div>;
+  if (isLoading) return <Loading />
+  if (error) return <ErrorText text="idioms" />
 
   return <article>
     <HeadingText>Idioms</HeadingText>

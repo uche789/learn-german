@@ -97,7 +97,9 @@ export type PostBase = {
 }
 
 export type Post = PostBase & {
-  content: any
+  content: {
+    json: any
+  }
 }
 
 export type VocabularyWithTranslation = {

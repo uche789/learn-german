@@ -187,6 +187,7 @@ export const useIdiomCollectionQuery = (ids: string[], langCode: SupportedLangua
     queryKey: ['idioms', ids, langCode, language],
     queryFn: () => getIdiomsCollection(ids, langCode, language),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 1,
   });
 }
 
@@ -196,6 +197,7 @@ export const useIdiomQuery = (slug: string, language: AppLanguage) => {
     queryKey: ['idioms', slug, language],
     queryFn: () => getIdiom(slug, language),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 1,
   });
 }
 
@@ -204,6 +206,7 @@ export const useGrammarCollectionQuery = (ids: string[], langCode: SupportedLang
     queryKey: ['posts', ids, langCode],
     queryFn: () => getPostCollection(ids, langCode),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 1,
   });
 }
 
@@ -213,5 +216,6 @@ export const useGrammarQuery = (slug: string, language: AppLanguage) => {
     queryKey: ['posts', slug, language],
     queryFn: () => getPost(slug, language),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 1,
   });
 }

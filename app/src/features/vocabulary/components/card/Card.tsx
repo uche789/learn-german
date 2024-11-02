@@ -35,7 +35,7 @@ const Card: React.FC<CardProps> = ({ word }) => {
               {getLangText()}
             </button>
           </div>
-          <div className="text-center text-2xl font-semi-bold my-8">{getWord()}</div>
+          <div className="flex items-center justify-center text-2xl font-semi-bold my-8 min-h-64">{getWord()}</div>
         </div>
       )}
     </>

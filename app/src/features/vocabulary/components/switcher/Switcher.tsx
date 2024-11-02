@@ -1,6 +1,6 @@
 import React from "react";
 import "./switcher.css";
-import AppButton from "../../components/button/app-button";
+import AppButton from "@/components/button/Button";
 
 interface SwitcherProps {
   onSwitch(): void;

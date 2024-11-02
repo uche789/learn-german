@@ -15,7 +15,7 @@ export default function AppFooter() {
   }
 
   return <footer className="fixed bottom-0 sm:absolute w-full flex justify-center">
-    <nav className="sm:hidden flex m-auto justify-between w-full p-4 shadow-inner">
+    <nav className="sm:hidden flex m-auto justify-between w-full p-4 shadow-inner bg-white">
       {links.map((link) => <Link
         to={'/' + params.lang + link.to} key={link.to}
         className={getnavClasses(link.to)}

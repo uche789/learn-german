@@ -1,4 +1,4 @@
-import AppButton from "@/components/button/app-button";
+import AppButton from "@/components/button/Button";
 import { ButtonVariant } from "@/lib/types";
 import { MouseEventHandler } from "react";
 

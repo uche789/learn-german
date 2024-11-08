@@ -23,7 +23,7 @@ const LanguageDropdown: FC<{ selected?: string, clickHandler: (value: string) =>
   selected = "de",
   clickHandler,
 }) => {
-const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const getClassMenuItem = (value: string) =>
     `language-dropdown-menu-item ${selected === value ? "language-dropdown-menu-item--selected" : ""}`;
 

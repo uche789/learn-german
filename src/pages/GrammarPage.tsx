@@ -20,6 +20,8 @@ export default function Practice() {
     const selected = searchParams.get('grammarType');
     if (selected) {
       setIds([...ids, categories.grammar[selected]])
+    } else {
+      setIds(ids)
     }
     refetch()
   }, [params, searchParams])

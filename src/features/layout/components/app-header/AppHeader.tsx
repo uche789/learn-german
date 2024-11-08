@@ -2,7 +2,7 @@ import { IconType } from "@/lib/types";
 import SvgIcon from "@/components/svg-icon/svg-icon";
 import "./AppHeader.scss";
 import links from "../links";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, redirect, useLocation, useNavigate, useParams } from "react-router-dom";
 import LanguageDropdown from "@/components/language-dropdown.tsx/LanguageDropdown";
 
 export default function AppHeader() {
@@ -18,8 +18,22 @@ export default function AppHeader() {
   }
 
   const setLanguage = (value: string) => {
+    if (/\/grammar\/[^/]+/.test(window.location.pathname)) {
+      navigate('/' + value + '/grammar');
+      return;
+    } else if (/\/practice\/[^/]+/.test(window.location.pathname)) {
+      navigate('/' + value + '/practice');
+      return;
+    } else if (/\/vocabulary\/[^/]+/.test(window.location.pathname)) {
+      navigate('/' + value + '/vocabulary');
+      return;
+    } else if (/\/idiom\//.test(window.location.pathname)) {
+      navigate('/' + value + '/idioms');
+      return;
+    }
+
     const pathname = window.location.pathname.replace(/\/(de|fr|jp)/, `/${value}`);
-    window.location.replace(window.origin + pathname)
+    navigate(pathname.replace('/learn-german', ''))
   }
 
   return (

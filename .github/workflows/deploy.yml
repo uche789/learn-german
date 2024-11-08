@@ -34,11 +34,14 @@ jobs:
         with:
           node-version: 22
           cache: yarn
+          
+      - name: Setup yarn
+        run: npm install -g yarn
         
       - name: Install and build
         run: |
-          npm ci
-          npm run build
+          yarn
+          yarn build
 
       - name: Deploy 🚀
         uses: actions/deploy-pages@v4

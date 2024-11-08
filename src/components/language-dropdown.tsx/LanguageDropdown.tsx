@@ -32,7 +32,6 @@ const [isOpen, setIsOpen] = useState(false);
 
 
   const toggleDropdown = () => {
-    console.log('comes here')
     setIsOpen(!isOpen)
   };
 

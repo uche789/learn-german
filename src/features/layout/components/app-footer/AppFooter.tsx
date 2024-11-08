@@ -8,7 +8,7 @@ export default function AppFooter() {
 
   const getnavClasses = (to: string) => {
     let className = "px-2 flex flex-col justify-center items-center"
-    if (window.location.pathname.startsWith(`/${params.lang}${to}`)) {
+    if (window.location.pathname.startsWith(`/learn-german/${params.lang}${to}`)) {
       className += " font-semibold text-pink-600"
     }
     return className;

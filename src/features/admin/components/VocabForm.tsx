@@ -1,8 +1,7 @@
-import { DetailedHTMLProps, FormEvent, FormEventHandler, FormHTMLAttributes, useEffect, useState } from "react"
+import { FormEventHandler, useEffect, useState } from "react"
 import { addVocabulary, deleteVocabulary, updatedVocabulary, } from "../lib/api"
 import { VocabularyType, Gender, LanguageProficienyLevel, SupportedLanguages, WordType } from "@/lib/types"
 import { useNavigate } from "react-router-dom"
-import { finalization, title } from "process"
 
 type TextAreaContent = {
   id: string

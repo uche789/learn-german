@@ -50,7 +50,6 @@ export default function VocabFormAmin() {
                 <>
                   <VocabFileUpload />
                   <p className="text-center mt-5 font-semibold">OR</p>
-                  <SwitchLang value={lang} updateLang={(lang: SupportedLanguages) => setLang(lang)} />
                 </>
               }
               <VocabForm data={data} lang={lang} />

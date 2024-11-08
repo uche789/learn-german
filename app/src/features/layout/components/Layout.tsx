@@ -22,14 +22,6 @@ export default function Layout() {
       <AppHeader />
       <main className="max-w-screen-md w-full px-4 m-auto pt-24 pb-24">
         <Outlet />
-        <div className="wrapper">
-          <SelectItem
-            label="C1 level"
-            icon={IconType.French}
-            isBolded={true}
-            onClick={() => {}}
-          />
-        </div>
       </main>
       <AppFooter />
     </>

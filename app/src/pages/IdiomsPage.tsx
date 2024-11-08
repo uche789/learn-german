@@ -1,4 +1,4 @@
-import TopicList from "@/components/topicList/TopicList";
+import TopicList from "@/components/topic-list/TopicList";
 import HeadingText from "@/components/Heading";
 import { useIdiomCollectionQuery } from "@/lib/api";
 import categories from "@/lib/categories";
@@ -23,6 +23,8 @@ export default function Idioms() {
 
   if (isLoading) return <Loading />
   if (error) return <ErrorText text="idioms" />
+
+  if (!data?.length) return <div className="mt-8 text-center">Your idiom list is empty.</div>
 
   return <article>
     <HeadingText>Idioms</HeadingText>

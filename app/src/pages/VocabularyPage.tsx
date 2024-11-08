@@ -1,5 +1,5 @@
 import Loading from "@/components/Loading";
-import TopicList from "@/components/topicList/TopicList";
+import TopicList from "@/components/topic-list/TopicList";
 import Heading from "@/components/Heading";
 import { useVocabularyQuery } from "@/lib/api";
 import getLangConfig from "@/lib/langConfig";
@@ -37,7 +37,8 @@ export default function VocabularyPage() {
   }, [params])
 
   if (isLoading) return <Loading />
-  if (error) return <ErrorText text="vocabulary" />
+
+  if (error || !data?.length) return <div className="mt-8 text-center">Your vocabulary list is empty.</div>
 
   return <div>
     <Heading>Vocabulary</Heading>

@@ -171,6 +171,7 @@ export const useVocabularyQuery = (langCode: string) => {
     queryKey: ['vocabulary', langCode],
     queryFn: () => getVocabularyList(langCode),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 1,
   });
 }
 
@@ -179,6 +180,7 @@ export const useSingleVocabularyQuery = (word: string, langCode: string) => {
     queryKey: ['vocabulary', word, langCode],
     queryFn: () => getVocabulary(word, langCode),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 1,
   });
 }
 
@@ -187,7 +189,7 @@ export const useIdiomCollectionQuery = (ids: string[], langCode: SupportedLangua
     queryKey: ['idioms', ids, langCode, language],
     queryFn: () => getIdiomsCollection(ids, langCode, language),
     staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1,
+    retry: 2,
   });
 }
 
@@ -197,7 +199,7 @@ export const useIdiomQuery = (slug: string, language: AppLanguage) => {
     queryKey: ['idioms', slug, language],
     queryFn: () => getIdiom(slug, language),
     staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1,
+    retry: 2,
   });
 }
 
@@ -206,7 +208,7 @@ export const useGrammarCollectionQuery = (ids: string[], langCode: SupportedLang
     queryKey: ['posts', ids, langCode],
     queryFn: () => getPostCollection(ids, langCode),
     staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1,
+    retry: 2,
   });
 }
 
@@ -216,6 +218,6 @@ export const useGrammarQuery = (slug: string, language: AppLanguage) => {
     queryKey: ['posts', slug, language],
     queryFn: () => getPost(slug, language),
     staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1,
+    retry: 2,
   });
 }

@@ -1,4 +1,4 @@
-import TopicList from "@/components/topicList/TopicList";
+import TopicList from "@/components/topic-list/TopicList";
 import { GlobalContext } from "@/context/global";
 import HeadingText from "@/components/Heading";
 import { AppLanguage, LanguageProficienyLevel, SupportedLanguages, Topic } from "@/lib/types";
@@ -38,6 +38,8 @@ export default function Practice() {
       }
     ]
   }
+
+  if (!topics[getLangConfig(params.lang).langCode].length) return <div className="mt-8 text-center">Your practice list is empty.</div>
 
   return <article>
     <HeadingText>Practice</HeadingText>

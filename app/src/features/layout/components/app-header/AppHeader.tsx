@@ -3,6 +3,7 @@ import SvgIcon from "@/components/svg-icon/svg-icon";
 import "./AppHeader.scss";
 import links from "../links";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import LanguageDropdown from "@/components/language-dropdown.tsx/LanguageDropdown";
 
 export default function AppHeader() {
   const params = useParams();
@@ -15,7 +16,12 @@ export default function AppHeader() {
     }
     return className;
   }
-  
+
+  const setLanguage = (value: string) => {
+    const pathname = window.location.pathname.replace(/\/(de|fr|jp)/, `/${value}`);
+    window.location.replace(window.origin + pathname)
+  }
+
   return (
     <header className="fixed w-full flex items-center min-h-16 bg-white z-10 shadow">
       <div className="max-w-screen-lg w-full px-4 m-auto flex items-center justify-between">
@@ -31,14 +37,13 @@ export default function AppHeader() {
         </span>
         <div className="flex items-center">
           <nav className="sm:block hidden">
-            {links.map((link) => <Link 
+            {links.map((link) => <Link
               to={'/' + params.lang + link.to} key={link.to}
               className={getnavClasses(link.to)}
-              >{link.name}</Link>
+            >{link.name}</Link>
             )}
           </nav>
-          <SvgIcon name={IconType.German} />
-          {/* <Dropdown /> */}
+          <LanguageDropdown clickHandler={setLanguage} selected={params.lang} />
         </div>
       </div>
     </header>

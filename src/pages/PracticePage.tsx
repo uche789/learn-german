@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import getLangConfig from "@/lib/langConfig";
 
 export default function Practice() {
-  const state = useContext(GlobalContext);
   const params = useParams()
 
   const topics: Record<SupportedLanguages, Topic[]> = {
@@ -24,7 +23,7 @@ export default function Practice() {
         lessonType: "",
         title: "Vocabulary",
         levels: new Set([]),
-        to: `/${state.langCode}/practice/vocabulary`
+        to: `/${getLangConfig(params.lang).langCode}/practice/vocabulary`
       }
     ],
     fr: [],
@@ -34,7 +33,7 @@ export default function Practice() {
         lessonType: "",
         title: "Vocabulary",
         levels: new Set([]),
-        to: `/${state.langCode}/practice/vocabulary`
+        to: `/${getLangConfig(params.lang).langCode}/practice/vocabulary`
       }
     ]
   }
@@ -45,7 +44,7 @@ export default function Practice() {
     <HeadingText>Practice</HeadingText>
     {
       topics[getLangConfig(params.lang).langCode].length > 0 &&
-      <TopicList topics={topics[getLangConfig(params.lang).langCode]} language={state.levelLanguage} />
+      <TopicList topics={topics[getLangConfig(params.lang).langCode]} language={getLangConfig(params.lang).levelLanguage} />
     }
     
   </article>;

@@ -139,7 +139,8 @@ export const getIdiom = async (slug: string, language: AppLanguage) => {
 /* -------------- VOCABULARY ----------------- */
 
 export const getVocabFile = async (langCode: string) => {
-  const response = await fetch(`/${langCode}.json`, {
+  import.meta.env.PROD
+  const response = await fetch(`${window.origin}/${import.meta.env.PROD ? 'learn-german/' : ''}${langCode}.json`, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

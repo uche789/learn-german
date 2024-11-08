@@ -1,0 +1,12 @@
+.switcher {
+    padding: 20px 0;
+
+    .btn {
+        width: 100%;
+    }
+}
+
+
+.switcher-button:hover {
+    opacity: 0.7;
+}

@@ -2,10 +2,11 @@ import categories from "@/lib/categories";
 import { ReactNode } from "react";
 import { useSearchParams } from "react-router-dom";
 
-interface GrammarTypesProps { 
+interface GrammarTypesProps {
+  disabled?: boolean
 }
 
-export default function GrammarType() {
+export default function GrammarType({ disabled = false }: GrammarTypesProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   
   const getClassName = (key: string) => {
@@ -33,6 +34,7 @@ export default function GrammarType() {
         className={getClassName(key)}
         key={key}
         onClick={() => onClick(key)}
+        disabled={disabled}
       >{key}</button>
     )}
   </div>

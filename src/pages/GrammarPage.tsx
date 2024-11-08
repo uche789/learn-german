@@ -29,7 +29,7 @@ export default function Practice() {
   if (isLoading) return <Loading />
   if (error) return <ErrorText text="grammar list" />
 
-  if (!data?.length) return <div className="mt-8 text-center">Your grammar list is empty.</div>
+  if (!searchParams.has('grammarType') && !data?.length) return <div className="mt-8 text-center">Your grammar list is empty.</div>
 
   return <article>
     <div className="mb-8">

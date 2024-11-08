@@ -22,7 +22,7 @@ const App: React.FC = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <BrowserRouter basename="/learn-german">
           <Routes>
             {/* Default route redirects to /en or any default language */}
             <Route path="/" element={<Navigate to="/de" />} />

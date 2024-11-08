@@ -25,7 +25,9 @@ export default function RichTextRenderer({ richTextDocument }: {richTextDocument
       // Handle tables
       [BLOCKS.TABLE]: (node, children) => (
         <table className="min-w-full border-collapse border border-gray-300">
-          {children}
+          <tbody>
+            {children}
+          </tbody>
         </table>
       ),
       [BLOCKS.TABLE_ROW]: (node, children) => (

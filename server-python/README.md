@@ -1,5 +1,11 @@
-python -m http.server 3030
+# Simple python application
 
-http://0.0.0.0:3030/
+A simple web api to build a vocabulary list
 
- fastapi dev main.py
+Running at http://0.0.0.0:3030/
+
+## Run application
+
+```
+fastapi dev main.py
+```

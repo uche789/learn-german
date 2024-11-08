@@ -70,6 +70,4 @@ jobs:
     steps:
       - name: Deploy 🚀
         uses: actions/deploy-pages@v4
-        with:
-          folder: projects/learning # The folder the action should deploy.
 

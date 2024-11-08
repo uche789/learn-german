@@ -11,6 +11,12 @@ export default function AppFooter() {
     if (window.location.pathname.startsWith(`/learn-german/${params.lang}${to}`)) {
       className += " font-semibold text-pink-600"
     }
+
+    if (to.includes('grammar') &&
+      (window.location.pathname.endsWith(`/learn-german/${params.lang}/`)
+      || window.location.pathname.endsWith(`/learn-german/${params.lang}`))) {
+      className += " font-semibold text-pink-600"
+    }
     return className;
   }
 

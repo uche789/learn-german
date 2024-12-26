@@ -1,27 +1,25 @@
 import { VocabularyType } from "@/lib/types";
 
+const base_url = import.meta.env.PROD ? 'https://' : 'http://localhost:8000';
+
 const fetchData = async (path: string, method = 'GET', body?: string | FormData, headers = {}) => {
-    const base_url = import.meta.env.PROD ? 'https://' : 'http://localhost:8000';
-    const request = await fetch(base_url + path, {
+    const response = await fetch(base_url + path, {
         method,
         body,
         headers,
         credentials: 'include',
     });
 
-    if (!request.ok) {
-        if ([401,403].includes(request.status)) {
-            if (window.location.pathname.includes('/admin/login')) {
-                return;
-            }
+    if (!response.ok) {
+        if ([401,403].includes(response.status)) {
             window.location.assign('/learn-german/admin/login')
             return;
         }
 
-        throw new Error(request.statusText);
+        throw new Error(response.statusText);
     }
 
-    const result = await request.json()
+    const result = await response.json()
     return result;
 }
 
@@ -41,7 +39,16 @@ export const logout = async () => {
 }
 
 export const startAuth = async () => {
-    await fetchData('/auth')
+    return await fetchData('/auth')
+}
+
+export const checkAuth = async () => {
+    try {
+        const response = await fetch(base_url + '/auth', { credentials: 'include' })
+        return response.ok
+    } catch {
+        window.alert('Something went wrong')
+    }
 }
 
 export const getVocabulary = async (lang: string, query?: string) => {

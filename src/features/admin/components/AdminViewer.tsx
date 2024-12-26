@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { VocabularyType, SupportedLanguages } from "@/lib/types"
 import { Link } from "react-router-dom"
 

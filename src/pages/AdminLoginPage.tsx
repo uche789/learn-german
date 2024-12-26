@@ -1,20 +1,21 @@
 import AdminHeader from "@/features/admin/components/AdminHeader";
-import { login } from "@/lib/api/vocab";
-import { FormEventHandler } from "react";
+import { checkAuth, login } from "@/lib/api/vocab";
+import { FormEventHandler, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminLoginPage() {
   const inputClasses = 'border rounded border-gray-400 p-2';
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     await startAuth()
-  //     navigate('/admin')
-  //   }
-  //   fetchData()
-  //   startAuth()
-  // }, [])
+  useEffect(() => {
+    async function fetchData() {
+      const result = await checkAuth()
+      if (result) {
+        navigate('/admin')
+      }
+    }
+    fetchData()
+  }, [])
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (formEvent) => {
     formEvent.preventDefault()

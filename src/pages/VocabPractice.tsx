@@ -5,10 +5,10 @@ import Switcher from "@/features/vocabulary/components/switcher/Switcher";
 import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
 import { GlobalContext } from "@/context/global";
 import { VocabularyType, VocabularyWithTranslation } from "@/lib/types";
-import { useVocabularyQuery } from "@/lib/api";
 import getLangConfig from "@/lib/langConfig";
 import Loading from "@/components/Loading";
 import ErrorText from "@/components/ErrorText";
+import { useVocabularyQuery } from "@/lib/api/vocab";
 
 export default function VocabularyPractice() {
   const params = useParams()

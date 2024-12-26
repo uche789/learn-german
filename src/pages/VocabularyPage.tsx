@@ -1,17 +1,19 @@
 import Loading from "@/components/Loading";
 import TopicList from "@/components/topic-list/TopicList";
 import Heading from "@/components/Heading";
-import { useVocabularyQuery } from "@/lib/api";
 import getLangConfig from "@/lib/langConfig";
 import { Topic } from "@/lib/types";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import ErrorText from "@/components/ErrorText";
+import { GlobalContext } from "@/context/global";
+import { useVocabularyQuery } from "@/lib/api/vocab";
 
 export default function VocabularyPage() {
   const [query, setQuery] = useState('')
   const params = useParams()
-  const { data, isLoading, error, refetch } = useVocabularyQuery(getLangConfig(params.lang).langCode)
+  const state = useContext(GlobalContext);
+  const { data, isLoading, error, refetch } = useVocabularyQuery(state.langCode)
   const topics = useMemo(() => {
     const temp: Topic[] = []
     data?.forEach((vocab) => {

@@ -1,13 +1,16 @@
 import ErrorText from "@/components/ErrorText";
 import Loading from "@/components/Loading";
+import { GlobalContext } from "@/context/global";
 import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
-import { useSingleVocabularyQuery } from "@/lib/api";
+import { useSingleVocabularySlugQuery } from "@/lib/api/vocab";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 export default function VocabularyDetailsPage() {
+  const state = useContext(GlobalContext);
   const params = useParams();
   const slug = params.slug?.split('_')[1] || '';
-  const { data, isLoading, error } = useSingleVocabularyQuery(slug, params.lang || 'de')
+  const { data, isLoading, error } = useSingleVocabularySlugQuery(slug, state.langCode);
 
   if (isLoading) return <Loading />
   if (error) return <ErrorText text="vocabulary" />

@@ -213,7 +213,6 @@ export const useGrammarCollectionQuery = (ids: string[], langCode: SupportedLang
   });
 }
 
-//TODO: restrict by language as well
 export const useGrammarQuery = (slug: string, language: AppLanguage) => {
   return useQuery({
     queryKey: ['posts', slug, language],

@@ -4,7 +4,7 @@ import { useGrammarQuery } from "@/lib/api";
 import { useParams } from "react-router-dom";
 import { ReactNode } from "react";
 
-jest.mock("@/features/layout/components/Heading", () => ({ children }: { children: ReactNode}) => <h1>{children}</h1>);
+jest.mock("@/components/Heading", () => ({ children }: { children: ReactNode}) => <h1>{children}</h1>);
 jest.mock("@/lib/api", () => ({
   useGrammarQuery: jest.fn(),
 }));

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { getVocabulary } from "../lib/api"
 import { VocabularyType, SupportedLanguages } from "@/lib/types"
 import { Link } from "react-router-dom"
 

@@ -12,8 +12,9 @@ import VocabularyPage from "@/pages/VocabularyPage";
 import VocabularyDetailsPage from "@/pages/VocabularyDetailsPage";
 import VocabPractice from "@/pages/VocabPractice";
 import GlobalStateProvider from "./context/global";
-import VocabAmin from "./pages/VocabAdmin";
-import VocabFormAdmin from "./pages/VocabFormAdmin";
+import AdminPage from "./pages/AdminPage";
+import AdminVocabFormPage from "./pages/AdminVocabFormPage";
+import AdminLoginPage from "./pages/AdminLoginPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient()
@@ -46,8 +47,9 @@ const App: React.FC = () => {
               <Route path="/:lang/vocabulary/" element={<VocabularyPage />} />
               <Route path="/:lang/vocabulary/:slug" element={<VocabularyDetailsPage />} />
             </Route>
-            <Route path="/admin" element={<VocabAmin />} />
-            <Route path="/admin/vocab/form" element={<VocabFormAdmin />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/vocab/form" element={<AdminVocabFormPage />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
             <Route path="*" element={<ErrorPage />} />
             <Route path="/error" element={<ErrorPage />} />
           </Routes>

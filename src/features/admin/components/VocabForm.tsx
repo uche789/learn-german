@@ -1,7 +1,7 @@
 import { FormEventHandler, useEffect, useState } from "react"
-import { addVocabulary, deleteVocabulary, updatedVocabulary, } from "../lib/api"
 import { VocabularyType, Gender, LanguageProficienyLevel, SupportedLanguages, WordType } from "@/lib/types"
 import { useNavigate } from "react-router-dom"
+import { updatedVocabulary, addVocabulary, deleteVocabulary } from "@/lib/api/vocab"
 
 type TextAreaContent = {
   id: string

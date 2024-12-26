@@ -1,5 +1,6 @@
 import { AppLanguage, LevelLanguage, SupportedLanguages } from "@/lib/types";
 import { ReactNode, createContext, useReducer } from "react";
+import { useParams } from "react-router-dom";
 
 const languages: Record<SupportedLanguages, AppLanguage> = {
   fr: AppLanguage.French,
@@ -38,7 +39,7 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
     const language = languages[action.payload.value];
     return { ...state, ...{ 
       langCode: action.payload.value,
-      language: languages[action.payload.value],
+      language,
       levelLanguage: action.payload.value !== 'jp' ? LevelLanguage.European : language as unknown as LevelLanguage,
     }};
   }
@@ -51,6 +52,11 @@ export default function GlobalStateProvider({
 }: {
   children: ReactNode;
 }) {
+  const params = useParams();
+  const defaultLanguage = (params.lang || 'de') as SupportedLanguages;
+  initialState.langCode =  defaultLanguage;
+  initialState.language = languages[defaultLanguage];
+  initialState.levelLanguage = defaultLanguage !== 'jp' ? LevelLanguage.European : languages[defaultLanguage] as unknown as LevelLanguage;
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <GlobalContext.Provider value={state}>

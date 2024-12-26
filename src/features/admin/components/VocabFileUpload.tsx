@@ -1,6 +1,24 @@
+import { uploadFile } from "@/lib/api/vocab";
 import { FormEventHandler, useState } from "react";
-import { uploadFile } from "../lib/api";
 import { useNavigate } from "react-router-dom";
+
+/**
+ * Example of file content:
+ * 
+ * [
+  {
+    "definition": ["Paper bound together"],
+    "word": "buch",
+    "english_translation": "book",
+    "examples": ["Das Buch ist interessant"],
+    "language": "de",
+    "word_type": "Noun",
+    "levels": [],
+    "gender": null
+  }
+]
+ * 
+ */
 
 export default function VocabFileUpload() {
   const [loading, setLoading] = useState(false)

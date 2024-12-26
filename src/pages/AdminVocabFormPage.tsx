@@ -1,23 +1,19 @@
-import SwitchLang from "@/features/admin/components/SwitchLang";
+import AdminHeader from "@/features/admin/components/AdminHeader";
 import VocabFileUpload from "@/features/admin/components/VocabFileUpload";
 import VocabForm from "@/features/admin/components/VocabForm";
-import { getVocabularyById } from "@/features/admin/lib/api";
+import { startAuth, getVocabularyById } from "@/lib/api/vocab";
 import { VocabularyType, SupportedLanguages } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export default function VocabFormAmin() {
+export default function AdminVocabFormPage() {
   const [lang, setLang] = useState<SupportedLanguages>('de')
-  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<VocabularyType>()
   const [searchParams] = useSearchParams()
 
   useEffect(() => {
-    if (!window.location.origin.includes('http://localhost')) {
-      setError(true);
-    }
-
+    startAuth()
   }, [])
 
   useEffect(() => {
@@ -37,26 +33,20 @@ export default function VocabFormAmin() {
   }, [])
 
   return <>
-    <header><h1 className="text-xl m-4 font-semibold text-center">Manage vocabulary</h1></header>
-    <main className="w-full max-w-3xl m-auto">
-      {
-        error ?
-          <p>Ops, you cannot access this page</p>
-          :
-          <>
-            
-            {!loading && <>
-              {!data && 
-                <>
-                  <VocabFileUpload />
-                  <p className="text-center mt-5 font-semibold">OR</p>
-                </>
-              }
-              <VocabForm data={data} lang={lang} />
+    <AdminHeader title="Manage vocabulary" />
+    <main className="w-full max-w-3xl m-auto px-4">
+      <>
+        {!loading && <>
+          {!data &&
+            <>
+              <VocabFileUpload />
+              <p className="text-center mt-5 font-semibold">OR</p>
             </>
-            }
-          </>
-      }
+          }
+          <VocabForm data={data} lang={lang} />
+        </>
+        }
+      </>
     </main>
   </>
 

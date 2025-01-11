@@ -10,9 +10,9 @@ export default function AdminViewer({ vocabulary, lang }: { vocabulary: Vocabula
             <p className="italic text-sm">{vocab.word_type}</p>
             <p><strong>Translation:</strong> {vocab.english_translation}</p>
             <span className="uppercase text-xs font-semibold">Definition(s)</span>
-            <ol className="list-decimal pl-10">{vocab.definition.map((def, index) => <li key={index}>{def}</li>)}</ol>
+            <ol className="list-decimal pl-10">{vocab.definition?.map((def, index) => <li key={index}>{def}</li>)}</ol>
             <span className="uppercase text-xs font-semibold">Example(s)</span>
-            <ol className="list-decimal pl-10">{vocab.examples.map((ex, index) => <li key={index}>{ex}</li>)}</ol>
+            <ol className="list-decimal pl-10">{vocab.examples?.map((ex, index) => <li key={index}>{ex}</li>)}</ol>
             
             {vocab.levels.length > 0 && 
             <>

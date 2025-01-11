@@ -20,8 +20,12 @@ const fetchData = async (path: string, method = 'GET', body?: string | FormData,
     throw new Error(response.statusText);
   }
 
-  const result = await response.json()
-  return result;
+  try {
+    const result = await response.json()
+    return result;
+  } catch {
+    return {};
+  }
 }
 
 export const login = async (formData: FormData) => {

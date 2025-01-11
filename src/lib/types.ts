@@ -67,8 +67,8 @@ export const Gender: Readonly<Record<string, string>> = Object.freeze({
 
 export type VocabularyType = {
   vocab_id: number;
-  definition: string[];
-  examples: string[];
+  definition: string[] | null;
+  examples: string[] | null;
   english_translation: string;
   word: string;
   gender: string | null;

@@ -1,12 +1,16 @@
 import { VocabularyType, SupportedLanguages } from "@/lib/types"
 import { Link } from "react-router-dom"
 
-export default function AdminViewer({ vocabulary, lang }: { vocabulary: VocabularyType[], lang: SupportedLanguages}) {
+export default function AdminViewer({ vocabulary }: { vocabulary: VocabularyType[], lang: SupportedLanguages}) {
+  if (vocabulary.length === 0) {
+    return <div>You haven't added any vocabulary yet!</div>
+  }
+  
   return <div>
       {
         vocabulary.map((vocab) =>
           <div key={vocab.vocab_id} className="p-4 mb-2 border bg-gray-50">
-            <span className="text-lg font-semibold">{vocab.word}</span> {vocab.gender && <span>&#123;{vocab.gender}&#125;</span>}
+            <span className="text-lg font-semibold">{vocab.word}</span> {vocab.article && <span>&#123;{vocab.article}&#125;</span>}
             <p className="italic text-sm">{vocab.word_type}</p>
             <p><strong>Translation:</strong> {vocab.english_translation}</p>
             <span className="uppercase text-xs font-semibold">Definition(s)</span>

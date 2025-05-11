@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
     "language": "de",
     "word_type": "Noun",
     "levels": [],
-    "gender": null
+    "article": null
   }
 ]
  * 

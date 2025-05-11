@@ -16,5 +16,10 @@ const links: Array<{name: string, to: string, icon: IconType}> = [
         to: '/idioms',
         icon: IconType.Idioms
     },
+    {
+        name: 'Speaking',
+        to: '/speaking',
+        icon: IconType.Chat
+    },
 ]
 export default links;

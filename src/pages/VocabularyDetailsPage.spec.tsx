@@ -17,7 +17,7 @@ jest.mock("react-router-dom", () => ({
 describe("VocabularyDetailsPage", () => {
   const mockData = {
     word: "Haus",
-    gender: "n",
+    article: "n",
     word_type: "Noun",
     english_translation: "House",
     definition: ["A building for human habitation."],

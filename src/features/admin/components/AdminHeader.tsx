@@ -15,8 +15,8 @@ export default function AdminHeader({ title, showLogout = true }: { title: strin
 
   return <header>
     <h1 className="text-xl m-4 font-semibold text-center">{title}</h1>
-    {showLogout && <div className="text-center">
-      <button onClick={() => logoutSession()}>Logout</button>
+    {showLogout && <div className="text-center m-8">
+      <button className="text-red-500" onClick={() => logoutSession()}>Logout</button>
     </div>}
   </header>
 }

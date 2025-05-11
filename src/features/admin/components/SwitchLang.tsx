@@ -6,7 +6,7 @@ export default function SwitchLang({ updateLang, value = 'de' }: {
 }) {
 
   return <select
-    className="p-2 m-4 border rounded"
+    className="p-2 mr-2 border rounded"
     defaultValue={value}
     onChange={(e) => updateLang(e.target.value as SupportedLanguages)}
   >

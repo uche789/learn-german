@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Layout from "./features/layout/components/Layout";
+import Layout from "./layout/components/Layout";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
 import GrammarPage from "@/pages/GrammarPage";
@@ -10,9 +10,10 @@ import GrammarDetailsPage from "@/pages/GrammarDetailsPage";
 import VocabularyPage from "@/pages/VocabularyPage";
 import VocabularyDetailsPage from "@/pages/VocabularyDetailsPage";
 import GlobalStateProvider from "./context/global";
-import AdminPage from "./pages/AdminPage";
-import AdminVocabFormPage from "./pages/AdminVocabFormPage";
-import AdminLoginPage from "./pages/AdminLoginPage";
+import AdminPage from "./pages/admin/AdminPage";
+import AdminVocabFormPage from "./pages/admin/AdminVocabFormPage";
+import AdminLoginPage from "./pages/admin/AdminLoginPage";
+import SpeakingPage from "./pages/SpeakingPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient()
@@ -21,7 +22,12 @@ const App: React.FC = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename="/">
+        <BrowserRouter 
+          basename="/"
+          future={{
+            v7_relativeSplatPath: true,
+          }}
+        >
           <Routes>
             {/* Default route redirects to /en or any default language */}
             <Route path="/" element={<Navigate to="/de" />} />
@@ -42,6 +48,7 @@ const App: React.FC = () => {
               <Route path="/:lang/grammar/:slug" element={<GrammarDetailsPage />} />
               <Route path="/:lang/vocabulary/" element={<VocabularyPage />} />
               <Route path="/:lang/vocabulary/:slug" element={<VocabularyDetailsPage />} />
+              <Route path="/:lang/speaking" element={<SpeakingPage />} />
             </Route>
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/admin/vocab/form" element={<AdminVocabFormPage />} />

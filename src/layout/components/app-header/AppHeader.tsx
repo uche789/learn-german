@@ -21,19 +21,22 @@ export default function AppHeader() {
   }
 
   const setLanguage = (value: string) => {
+    console.log(window.location.pathname)
     dispatch({ type: GlobalActionType.SetLang, payload: { value: value as SupportedLanguages }})
-    if (/\/grammar\/[^/]+/.test(window.location.pathname)) {
+    if (window.location.pathname.includes('/grammar')) {
       navigate('/' + value + '/grammar');
       return;
-    } else if (/\/vocabulary\/[^/]+/.test(window.location.pathname)) {
+    } else if (window.location.pathname.includes('/vocabulary')) {
       navigate('/' + value + '/vocabulary');
       return;
-    } else if (/\/idiom\//.test(window.location.pathname)) {
+    } else if (window.location.pathname.includes('/idiom')) {
       navigate('/' + value + '/idioms');
       return;
+    } else if (window.location.pathname.includes('/speaking')) {
+      navigate('/' + value + '/speaking')
+    } else {
+      navigate('/' + value)
     }
-
-    const pathname = window.location.pathname.replace(/\/(de|fr|jp)/, `/${value}`);
   }
 
   return (

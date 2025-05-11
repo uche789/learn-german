@@ -1,7 +1,7 @@
 import { VocabularyType } from "@/lib/types";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-const base_url = import.meta.env.BACKEND_ENDPOINT;
+const base_url = import.meta.env.VITE_BACKEND_ENDPOINT;
 
 const fetchData = async (path: string, method = 'GET', body?: string | FormData, headers = {}) => {
   const response = await fetch(base_url + path, {

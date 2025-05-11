@@ -36,6 +36,7 @@ export enum IconType {
   Grammar = "Grammar",
   Vocabulary = "Vocabulary",
   Idioms = "Idioms",
+  Chat = "Chat",
 }
 
 export type ButtonVariant = "primary" | "secondary" | "correct" | "wrong";
@@ -58,7 +59,7 @@ export enum WordType {
   Adjective = "Adjective",
 }
 
-export const Gender: Readonly<Record<string, string>> = Object.freeze({
+export const Article: Readonly<Record<string, string>> = Object.freeze({
   Feminine: "f",
   Masculine: "m",
   Netural: "m",
@@ -71,7 +72,7 @@ export type VocabularyType = {
   examples: string[] | null;
   english_translation: string;
   word: string;
-  gender: string | null;
+  article: string | null;
   word_type: WordType | null;
   language: SupportedLanguages,
   levels: LanguageProficienyLevel[]

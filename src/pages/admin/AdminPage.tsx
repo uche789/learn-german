@@ -4,10 +4,15 @@ import SwitchLang from "@/features/admin/components/SwitchLang";
 import { getVocabulary, startAuth } from "@/lib/api/vocab";
 import { VocabularyType, SupportedLanguages } from "@/lib/types";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
 export default function AdminPage() {
-  const [lang, setLang] = useState<SupportedLanguages>('de')
+  const [params] = useSearchParams()
+  params.get('lang')
+  const defaultLang = (['de', 'fr', 'jp'] as SupportedLanguages[])
+    .includes(params.get('lang') as SupportedLanguages)
+    ? params.get('lang') as SupportedLanguages : 'de';
+  const [lang, setLang] = useState<SupportedLanguages>(defaultLang)
   const [data, setData] = useState<VocabularyType[]>([])
   const [query, setQuery] = useState('')
 
@@ -17,7 +22,8 @@ export default function AdminPage() {
 
   useEffect(() => {
     async function fetchData() {
-      setData(await getVocabulary(lang, query))
+      const result = await getVocabulary(lang, query);
+      setData(result || [])
     }
 
     fetchData();
@@ -32,10 +38,12 @@ export default function AdminPage() {
     <AdminHeader title="Manage vocabulary" />
     <main className="w-full max-w-3xl m-auto px-4">
       <>
-        <SwitchLang updateLang={onLanguageSwitch} />
-        <Link to={{ pathname: '/admin/vocab/form', search: `lang=${lang}` }}>
-          <span className="p-2 border rounded bg-blue-500 text-white">Add vocabulary</span>
-        </Link>
+        <div className="my-4">
+          <SwitchLang updateLang={onLanguageSwitch} value={lang} />
+          <Link to={{ pathname: '/admin/vocab/form', search: `lang=${lang}` }}>
+            <span className="p-2 border rounded bg-blue-500 text-white">Add vocabulary</span>
+          </Link>
+        </div>
         <div className="mb-5">
           <input
             type="text" className="p-2 border border-gray-400 rounded w-full"

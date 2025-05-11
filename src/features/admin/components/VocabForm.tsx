@@ -1,5 +1,5 @@
 import { FormEventHandler, useEffect, useState } from "react"
-import { VocabularyType, Gender, LanguageProficienyLevel, SupportedLanguages, WordType } from "@/lib/types"
+import { VocabularyType, Article, LanguageProficienyLevel, SupportedLanguages, WordType } from "@/lib/types"
 import { useNavigate } from "react-router-dom"
 import { updatedVocabulary, addVocabulary, deleteVocabulary } from "@/lib/api/vocab"
 
@@ -76,7 +76,7 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
         english_translation: formData.get('translation') as string,
         word: formData.get('word') as string,
         language: data?.language || lang,
-        gender: formData.get('gender') as string || null,
+        article: formData.get('article') as string || null,
         word_type: formData.get('word_type') as WordType,
         levels: formData.getAll('levels') as LanguageProficienyLevel[]
       }
@@ -85,7 +85,7 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
       } else {
         await addVocabulary(payload)
       }
-      navigate('/admin')
+      navigate(`/admin?lang=${lang}`)
     } catch (ex) {
       alert('An error occurred: ' + (ex as Error).message)
     }
@@ -142,10 +142,10 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
             </select>
           </div>
           <div className="mt-5">
-            <label className="block font-semibold">Gender</label>
-            <select className={inputClasses} style={{minWidth: '195px'}} name="gender" defaultValue={data?.gender || ''}>
+            <label className="block font-semibold">Article</label>
+            <select className={inputClasses} style={{minWidth: '195px'}} name="article" defaultValue={data?.article || ''}>
               <option value="">None</option>
-              {Object.keys(Gender).map(aGender => <option value={Gender[aGender]} key={aGender}>{aGender}</option>)}
+              {Object.keys(Article).map(aArticle => <option value={Article[aArticle]} key={aArticle}>{aArticle}</option>)}
             </select>
           </div>
           <div className="mt-5">

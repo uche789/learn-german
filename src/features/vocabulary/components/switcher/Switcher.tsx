@@ -4,12 +4,13 @@ import AppButton from "@/components/button/Button";
 
 interface SwitcherProps {
   onSwitch(): void;
+  label: string
 }
 
-const Switcher: React.FC<SwitcherProps> = ({ onSwitch }) => {
+const Switcher: React.FC<SwitcherProps> = ({ onSwitch, label }) => {
   return (
     <div className="switcher">
-      <AppButton onClick={onSwitch}>Next word</AppButton>
+      <AppButton onClick={onSwitch}>{label}</AppButton>
     </div>
   );
 };

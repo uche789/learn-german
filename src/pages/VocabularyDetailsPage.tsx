@@ -1,7 +1,7 @@
 import ErrorText from "@/components/ErrorText";
 import Loading from "@/components/Loading";
 import { GlobalContext } from "@/context/global";
-import BackPreviousPage from "@/features/layout/components/BackPreviousPage";
+import BackPreviousPage from "@/layout/components/BackPreviousPage";
 import { useSingleVocabularySlugQuery } from "@/lib/api/vocab";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
@@ -19,7 +19,7 @@ export default function VocabularyDetailsPage() {
     <div>
       {data && <>
         <BackPreviousPage text="Vocabulary" />
-        <h1 className="text-2xl font-semibold mb-4">{data.word} <span>{data.gender}</span></h1>
+        <h1 className="text-2xl font-semibold mb-4">{data.word} <span>{data.article}</span></h1>
         <p className="italic text-sm">{data.word_type}</p>
         <p className="my-4">{data.english_translation}</p>
         {!!data.definition?.length && <>

@@ -25,9 +25,6 @@ export default function AppHeader() {
     if (/\/grammar\/[^/]+/.test(window.location.pathname)) {
       navigate('/' + value + '/grammar');
       return;
-    } else if (/\/practice\/[^/]+/.test(window.location.pathname)) {
-      navigate('/' + value + '/practice');
-      return;
     } else if (/\/vocabulary\/[^/]+/.test(window.location.pathname)) {
       navigate('/' + value + '/vocabulary');
       return;
@@ -37,7 +34,6 @@ export default function AppHeader() {
     }
 
     const pathname = window.location.pathname.replace(/\/(de|fr|jp)/, `/${value}`);
-    navigate(pathname.replace('/learn-german', ''))
   }
 
   return (
@@ -51,7 +47,7 @@ export default function AppHeader() {
           aria-label="website name"
           className="text-xl text-pink-main font-bold"
         >
-          STUDY MORE
+          TomoStudy
         </span>
         <div className="flex items-center">
           <nav className="sm:block hidden">

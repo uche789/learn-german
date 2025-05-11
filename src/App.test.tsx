@@ -9,6 +9,6 @@ jest.mock('@/lib/config', () => ({
 
 test("renders APP", async () => {
   render(<App />);
-  const linkElement = await waitFor(() => screen.getByText(/STUDY MORE/i));
+  const linkElement = await waitFor(() => screen.getByText(/TomoStudy/i));
   expect(linkElement).toBeInTheDocument();
 });

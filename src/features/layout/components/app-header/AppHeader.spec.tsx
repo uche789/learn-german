@@ -9,6 +9,6 @@ test("renders header component", async () => {
       <Component />
     </BrowserRouter>
   );
-  const linkElement = await waitFor(() => screen.getByText(/STUDY MORE/i));
+  const linkElement = await waitFor(() => screen.getByText(/TomoStudy/i));
   expect(linkElement).toBeInTheDocument();
 });

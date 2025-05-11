@@ -3,14 +3,12 @@ import "./App.css";
 import Layout from "./features/layout/components/Layout";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
-import PracticePage from "@/pages/PracticePage";
 import GrammarPage from "@/pages/GrammarPage";
 import IdiomsPage from "@/pages/IdiomsPage";
 import IdiomDetailsPage from "@/pages/IdiomDetailsPage";
 import GrammarDetailsPage from "@/pages/GrammarDetailsPage";
 import VocabularyPage from "@/pages/VocabularyPage";
 import VocabularyDetailsPage from "@/pages/VocabularyDetailsPage";
-import VocabPractice from "@/pages/VocabPractice";
 import GlobalStateProvider from "./context/global";
 import AdminPage from "./pages/AdminPage";
 import AdminVocabFormPage from "./pages/AdminVocabFormPage";
@@ -23,7 +21,7 @@ const App: React.FC = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename="/learn-german">
+        <BrowserRouter basename="/">
           <Routes>
             {/* Default route redirects to /en or any default language */}
             <Route path="/" element={<Navigate to="/de" />} />
@@ -38,8 +36,6 @@ const App: React.FC = () => {
               }
             >
               <Route index element={<GrammarPage />} />
-              <Route path="/:lang/practice" element={<PracticePage />} />
-              <Route path="/:lang/practice/vocabulary" element={<VocabPractice />} />
               <Route path="/:lang/grammar" element={<GrammarPage />} />
               <Route path="/:lang/idioms" element={<IdiomsPage />} />
               <Route path="/:lang/idiom/:slug" element={<IdiomDetailsPage />} />

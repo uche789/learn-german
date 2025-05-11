@@ -136,54 +136,7 @@ export const getIdiom = async (slug: string, language: AppLanguage) => {
   return item;
 }
 
-/* -------------- VOCABULARY ----------------- */
-
-export const getVocabFile = async (langCode: string) => {
-  import.meta.env.PROD
-  const response = await fetch(`${window.origin}/${import.meta.env.PROD ? 'learn-german/' : ''}${langCode}.json`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  });
-
-  if (!response.ok) {
-    throw new NotFound()
-  }
-
-  return response.json();
-}
-
-export const getVocabularyList = async (langCode: string): Promise<VocabularyType[]> => {
-  const data = await getVocabFile(langCode);
-  return data as VocabularyType[];
-}
-
-export const getVocabulary = async (word: string, langCode: string): Promise<VocabularyType | undefined> => {
-  const result = await getVocabFile(langCode);
-
-  return (result as VocabularyType[]).find(r => r.word === word);
-}
-
 /*----------- TANSTACK QUERIES -----------------*/
-
-export const useVocabularyQuery = (langCode: string) => {
-  return useQuery({
-    queryKey: ['vocabulary', langCode],
-    queryFn: () => getVocabularyList(langCode),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1,
-  });
-}
-
-export const useSingleVocabularyQuery = (word: string, langCode: string) => {
-  return useQuery({
-    queryKey: ['vocabulary', word, langCode],
-    queryFn: () => getVocabulary(word, langCode),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1,
-  });
-}
 
 export const useIdiomCollectionQuery = (ids: string[], langCode: SupportedLanguages, language: AppLanguage) => {
   return useQuery({

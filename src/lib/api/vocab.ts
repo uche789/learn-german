@@ -13,7 +13,7 @@ const fetchData = async (path: string, method = 'GET', body?: string | FormData,
 
   if (!response.ok) {
     if ([401, 403].includes(response.status)) {
-      window.location.assign('/learn-german/admin/login')
+      window.location.assign('/admin/login')
       return;
     }
 
@@ -127,7 +127,6 @@ export const uploadFile = async (formData: FormData) => {
 /*----------- TANSTACK QUERIES -----------------*/
 
 export const useVocabularyQuery = (langCode: string, query?: string) => {
-  const queryClient = useQueryClient();
   return useQuery({
     queryKey: ['vocabulary', langCode, query],
     queryFn: () => getVocabulary(langCode, query),
@@ -137,7 +136,6 @@ export const useVocabularyQuery = (langCode: string, query?: string) => {
 }
 
 export const useSingleVocabularyQuery = (id: number) => {
-  const queryClient = useQueryClient();
   return useQuery({
     queryKey: ['vocabulary', id],
     queryFn: () => getVocabularyById(id),
@@ -147,7 +145,6 @@ export const useSingleVocabularyQuery = (id: number) => {
 }
 
 export const useSingleVocabularySlugQuery = (word: string, langCode: string) => {
-  const queryClient = useQueryClient();
   return useQuery({
     queryKey: ['vocabulary', word, langCode],
     queryFn: () => getVocabularySlug(word, langCode),

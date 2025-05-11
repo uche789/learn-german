@@ -103,7 +103,7 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
     }
   }
 
-  const inputClasses = 'border rounded border-gray-400 p-2';
+  const inputClasses = 'border rounded border-gray-400 p-2 w-full';
   const fieldSetClasses = 'border-b pb-5 border-gray-400';
   const textAreaDefinition = [
     {content: definitions, update: updatedDefinition, remove: removeDefinition, title: 'Definitions', suffix: 'definition', add: addDefinition},
@@ -111,7 +111,7 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
   ]
 
   return <>
-    <article>
+    <article className="max-w-md">
       <form className="p-4" onSubmit={submitAction}>
         <fieldset className={fieldSetClasses}>
           <legend className="py-5 text-xl font-semibold">Basic data (Mandatory)</legend>
@@ -169,11 +169,11 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
               {item.content.map((content) => 
                 <div className="flex align-center mb-5" key={content.id}>
                   <textarea 
-                    className="border p-2"
+                    className="border p-2 w-full"
                     defaultValue={content.value}
                     onChange={(e) => item.update(content.id, e.target.value)}
                   />
-                  <button className="text-red-600 underline ml-4" onClick={() => item.remove(content.id)}>- Remove</button>
+                  <button className="text-red-600 underline ml-4 text-sm" onClick={() => item.remove(content.id)}>Remove</button>
                 </div>
               )}
               <div className="mt-5">

@@ -4,7 +4,7 @@ import SwitchLang from "@/features/admin/components/SwitchLang";
 import { getVocabulary, startAuth } from "@/lib/api/vocab";
 import { VocabularyType, SupportedLanguages } from "@/lib/types";
 import { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function AdminPage() {
   const [params] = useSearchParams()

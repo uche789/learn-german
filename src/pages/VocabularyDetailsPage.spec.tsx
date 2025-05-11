@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import VocabularyDetailsPage from "./VocabularyDetailsPage";
-import { useSingleVocabularyQuery } from "@/lib/api";
+import { useSingleVocabularyQuery } from "@/lib/api/vocab";
 import { BrowserRouter, useParams } from "react-router-dom";
 
 // Mock the `useSingleVocabularyQuery` and `useParams` hooks

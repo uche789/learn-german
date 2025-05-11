@@ -1,4 +1,4 @@
-import { VocabularyType, AppLanguage, Idiom, IdiomBase, LanguageProficienyLevel, Post, PostBase, SupportedLanguages, Topic } from "../types";
+import { AppLanguage, Idiom, IdiomBase, LanguageProficienyLevel, Post, PostBase, SupportedLanguages, Topic } from "../types";
 import { idiomQuery, idiomsCollectionQuery, postCollectionQuery, postQuery } from "./queries";
 import remarkHtml from "remark-html";
 import { remark } from "remark";

@@ -4,13 +4,11 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install
-
 RUN yarn
 
 COPY . .
 
-CMD ["yarn", "build"]
+RUN yarn build
 
 FROM nginx:latest AS production-stage
 

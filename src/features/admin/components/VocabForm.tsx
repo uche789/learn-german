@@ -173,7 +173,7 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
                     defaultValue={content.value}
                     onChange={(e) => item.update(content.id, e.target.value)}
                   />
-                  <button className="text-red-600 underline ml-4 text-sm" onClick={() => item.remove(content.id)}>Remove</button>
+                  <button className="text-red-600 underline ml-4 text-smc" onClick={() => item.remove(content.id)}>Remove</button>
                 </div>
               )}
               <div className="mt-5">

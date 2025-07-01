@@ -5,7 +5,6 @@ import getLangConfig from "@/lib/langConfig";
 import { Topic } from "@/lib/types";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import ErrorText from "@/components/ErrorText";
 import { GlobalContext } from "@/context/global";
 import { useVocabularyQuery } from "@/lib/api/vocab";
 
@@ -40,19 +39,19 @@ export default function VocabularyPage() {
 
   if (isLoading) return <Loading />
 
-  if (error || !data?.length) return <div className="mt-8 text-center">Your vocabulary list is empty.</div>
-
   return <div>
     <Heading>Vocabulary</Heading>
-    <div className="mb-5">
-      <input
-        type="search" className="p-2 border border-gray-400 rounded w-full"
-        placeholder="Search word"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-    </div>
-    {}
+      {data?.length &&
+        <div className="mb-5">
+          <input
+            type="search" className="p-2 border border-gray-400 rounded w-full"
+            placeholder="Search word"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+      }
+    {(error || !data?.length) && <div className="mt-8 text-center">Your vocabulary list is empty.</div>}
     <TopicList topics={topics} language={getLangConfig(params.lang).levelLanguage} />
   </div>;
 }

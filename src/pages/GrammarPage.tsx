@@ -1,6 +1,5 @@
 import TopicList from "@/components/topic-list/TopicList";
-import { GlobalContext } from "@/context/global";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import categories from "@/lib/categories";
 import { useGrammarCollectionQuery } from "@/lib/api";
 import GrammarType from "@/features/grammar/components/GrammarType";
@@ -8,8 +7,10 @@ import { useParams, useSearchParams } from "react-router-dom";
 import getLangConfig from "@/lib/langConfig";
 import Loading from "@/components/Loading";
 import ErrorText from "@/components/ErrorText";
+import Heading from "@/components/Heading";
+import SubHeading from "@/components/SubHeading";
 
-export default function Practice() {
+export default function GrammarPage() {
   const [ searchParams ] = useSearchParams();
   const params = useParams()
   const [ids, setIds] = useState([categories.languages[ getLangConfig(params.lang).language]])
@@ -29,12 +30,13 @@ export default function Practice() {
   if (isLoading) return <Loading />
   if (error) return <ErrorText text="grammar list" />
 
-  if (!searchParams.has('grammarType') && !data?.length) return <div className="mt-8 text-center">Your grammar list is empty.</div>
-
   return <article>
+    <Heading>Grammar</Heading>
+    <SubHeading>Essential grammar rules and structures</SubHeading>
     <div className="mb-8">
       <GrammarType />
     </div>
+    {(!searchParams.has('grammarType') && !data?.length) && <div className="mt-8 text-center">Your grammar list is empty.</div>}
     {!!data?.length && <TopicList topics={data} language={ getLangConfig(params.lang).levelLanguage} />}
   </article>;
 }

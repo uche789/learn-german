@@ -35,7 +35,7 @@ export default function SpeakingPage() {
 
   return <div>
     <Heading>Speaking Practice</Heading>
-    <SubHeading>Practice speaking with prompts and keywords</SubHeading>
+    <SubHeading>Practice speaking using guided prompts and key vocabulary.</SubHeading>
     {word && <>
       <div className="rounded-md border p-4">
         <div className="flex items-center justify-center text-2xl font-semi-bold my-8 min-h-64">{word}</div>

@@ -21,7 +21,6 @@ export default function AppHeader() {
   }
 
   const setLanguage = (value: string) => {
-    console.log(window.location.pathname)
     dispatch({ type: GlobalActionType.SetLang, payload: { value: value as SupportedLanguages }})
     if (window.location.pathname.includes('/grammar')) {
       navigate('/' + value + '/grammar');

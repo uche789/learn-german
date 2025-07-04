@@ -61,7 +61,7 @@ Make sure that the ssl certificate and private key match match
 
 ```
 openssl rsa -noout -modulus -in private.key | openssl md5
-openssl x509 -noout -modulus -in ssl_bundle.crt | openssl md5
+openssl x509 -noout -modulus -in ssl-bundle.crt | openssl md5
 ```
 
  

@@ -18,4 +18,5 @@ RUN mkdir /app
 COPY --from=build-stage /app/build /app
 
 COPY nginx/default.conf /etc/nginx/nginx.conf
+COPY nginx/ssl /etc/nginx/ssl
 

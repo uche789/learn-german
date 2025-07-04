@@ -20,8 +20,8 @@ docker stop learn-lang-container
 docker rm learn-lang-container
 docker build . -t learn-lang-app
 
-# This starts a detached container named learn-lang-container and maps port 8080 to NGINX port 80.
-docker run -d -p 8080:80 --name learn-lang-container learn-lang-app
+# This starts a detached container named learn-lang-container and maps port 8080 to NGINX port 443.
+docker run -d -p 8080:443 --name learn-lang-container learn-lang-app
 ```
 
 Optional

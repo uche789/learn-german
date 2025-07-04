@@ -18,5 +18,5 @@ RUN mkdir /app
 COPY --from=build-stage /app/build /app
 
 COPY nginx/default.conf /etc/nginx/nginx.conf
-COPY nginx/ssl /etc/nginx/ssl
-
+COPY nginx/ssl/ssl_bundle.crt /etc/nginx/ssl/ssl_bundle.crt
+COPY nginx/ssl/private.key /etc/nginx/ssl/private.key

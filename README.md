@@ -43,8 +43,26 @@ docker ps
 # SSH into container using name or ID
 docker exec -it learn-lang-container sh
 docker exec -it <container_name_or_id> sh
+
+# Logs
+docker logs learn-lang-container
 ```
 
-## Permissions
+## Troubleshooting
 
+### Grant permission to run scripts
+
+```
 chmod +x scripts/*
+```
+
+### Matching ssl certificates
+Make sure that the ssl certificate and private key match match
+
+```
+openssl rsa -noout -modulus -in private.key | openssl md5
+openssl x509 -noout -modulus -in ssl_bundle.crt | openssl md5
+```
+
+ 
+

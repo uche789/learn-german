@@ -1,0 +1,8 @@
+services:
+  app:
+    build: 
+      context: .
+      target: build-stage  # Only build the first stage which creates the build folder
+    volumes:
+      - ./build:/tmp/output  # Mount host ./build directory to container /tmp/output
+    command: sh -c "cp -r /app/build/* /tmp/output/ && echo 'Build completed. Files copied to ./build on host machine.' && tail -f /dev/null"

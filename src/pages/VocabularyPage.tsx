@@ -41,7 +41,7 @@ export default function VocabularyPage() {
 
   return <div>
     <Heading>Vocabulary</Heading>
-      {data?.length &&
+      {!!data?.length &&
         <div className="mb-5">
           <input
             type="search" className="p-2 border border-gray-400 rounded w-full"

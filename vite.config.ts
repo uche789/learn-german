@@ -10,6 +10,10 @@ export default defineConfig({
   },
   server: {
     port: 5273,
+    https: {
+      key: path.resolve(__dirname, "nginx/ssl/private.key"),
+      cert: path.resolve(__dirname, "nginx/ssl/ssl-bundle.crt"),
+    }
   },
   plugins: [svgr(), react({ include: /\.(js|jsx|ts|tsx)$/ }), VitePWA()],
   resolve: {

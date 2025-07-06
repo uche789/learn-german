@@ -37,6 +37,8 @@ export enum IconType {
   Vocabulary = "Vocabulary",
   Idioms = "Idioms",
   Chat = "Chat",
+  Visibility = "Visibility",
+  VisibilityOff = "VisibilityOff",
 }
 
 export type ButtonVariant = "primary" | "secondary" | "correct" | "wrong";

@@ -28,6 +28,12 @@ const icons: Record<IconType, LazyExoticComponent<any>> = {
   ),
   [IconType.Chat]: lazy(
     async () => await import("@/assets/icons/chat.svg?react")
+  ),
+  [IconType.Visibility]: lazy(
+    async () => await import("@/assets/icons/visibility.svg?react")
+  ),
+  [IconType.VisibilityOff]: lazy(
+    async () => await import("@/assets/icons/visibilityOff.svg?react")
   )
 };
 

@@ -50,6 +50,7 @@ export type Topic = {
   subTitle?: string;
   levels: Set<LanguageProficienyLevel>;
   to: string;
+  type?: string;
 }
 
 export type SupportedLanguages = "fr" | "de" | "jp";
@@ -59,6 +60,10 @@ export enum WordType {
   Verb = "Verb",
   Adverb = "Adverb",
   Adjective = "Adjective",
+  Phrase = "Phrase",
+  Conjunction = "Conjunction",
+  Interjection = "Interjection",
+  Other = "Other"
 }
 
 export const Article: Readonly<Record<string, string>> = Object.freeze({

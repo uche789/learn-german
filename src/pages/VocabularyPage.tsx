@@ -4,34 +4,36 @@ import Heading from "@/components/Heading";
 import getLangConfig from "@/lib/langConfig";
 import { Topic } from "@/lib/types";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { GlobalContext } from "@/context/global";
 import { useVocabularyQuery } from "@/lib/api/vocab";
+import VocabType from "@/features/vocabulary/components/VocabType";
 
 export default function VocabularyPage() {
   const [query, setQuery] = useState('')
   const params = useParams()
+  const [searchParams] = useSearchParams()
   const state = useContext(GlobalContext);
   const { data, isLoading, error, refetch } = useVocabularyQuery(state.langCode)
   const topics = useMemo(() => {
     const temp: Topic[] = []
-    data?.forEach((vocab) => {
-      if (!query
-          || vocab.english_translation.toLowerCase().includes(query.toLowerCase())
-          || vocab.word.toLowerCase().includes(query.toLowerCase())
-        ) {
-        temp.push({
-          to: `/${getLangConfig(params.lang).langCode}/vocabulary/${vocab.word_type}_${vocab.word}`,
-          id: String(vocab.vocab_id),
+    return data?.filter((item) => !searchParams.get('vocabType')? item : item.word_type === searchParams.get('vocabType'))
+      .filter((item) => !query 
+        ? item
+        : item.english_translation.toLowerCase().includes(query.toLowerCase()) || item.word.toLowerCase().includes(query.toLowerCase())
+      )
+      .map((item) => {
+        return {
+          to: `/${getLangConfig(params.lang).langCode}/vocabulary/${item.word_type}_${item.word}`,
+          id: String(item.vocab_id),
           lessonType: "",
-          title: vocab.word,
-          subTitle: vocab.english_translation,
-          levels: new Set(vocab.levels)
-        })
-      }
-    })
-    return temp;
-  }, [data, query])
+          title: item.word,
+          subTitle: item.english_translation,
+          levels: new Set(item.levels),
+          type: item.word_type as string,
+        }
+      }) || [];
+  }, [data, query, searchParams])
 
   useEffect(() => {
     refetch()
@@ -49,6 +51,9 @@ export default function VocabularyPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+          <div className="mt-5">
+            <VocabType />
+          </div>
         </div>
       }
     {(error || !data?.length) && <div className="mt-8 text-center">Your vocabulary list is empty.</div>}

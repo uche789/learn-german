@@ -103,6 +103,11 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
     }
   }
 
+  const cancel: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    navigate(`/admin?lang=${lang}`);
+  }
+
   const inputClasses = 'border rounded border-gray-400 p-2 w-full';
   const fieldSetClasses = 'border-b pb-5 border-gray-400';
   const textAreaDefinition = [
@@ -184,7 +189,8 @@ export default function VocabForm({ data, lang = 'de' }: { data?: VocabularyType
         )}
         <div className="flex justify-between mt-12">
           {data && <button className="text-red-600 border-red-600 p-2 border rounded" onClick={remove}>Delete</button>}
-          <button type="submit" className="p-2 border rounded bg-blue-500 text-white justify-self-end">Submit</button>
+          <button className="p-2 mr-2 border rounded" onClick={cancel}>Cancel</button>
+          <button type="submit" className="p-2 border rounded bg-blue-500 text-white">Submit</button>
         </div>
       </form>
     </article>

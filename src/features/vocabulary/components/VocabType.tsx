@@ -1,15 +1,15 @@
 import useOptionSelection from "@/hooks/useOptionSelection";
-import categories from "@/lib/categories";
+import { WordType } from "@/lib/types";
 
-interface GrammarTypesProps {
+interface VocabTypesProps {
   disabled?: boolean
 }
 
-export default function GrammarType({ disabled = false }: GrammarTypesProps) {
-  const { getClassName, onClick } = useOptionSelection('grammar');
+export default function VocabType({ disabled = false }: VocabTypesProps) {
+  const { getClassName, onClick } = useOptionSelection('vocab');
 
   return <div className="flex overflow-x-auto no-scrollbar *:mr-2">
-    {Object.keys(categories.grammar).map((key) => 
+    {Object.keys(WordType).map((key) => 
       <button
         className={getClassName(key)}
         key={key}

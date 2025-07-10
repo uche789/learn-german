@@ -12,7 +12,7 @@ const fetchData = async (path: string, method = 'GET', body?: string | FormData,
   });
 
   if (!response.ok) {
-    if ([401, 403].includes(response.status)) {
+    if ([401, 403].includes(response.status) && window.location.pathname.includes('/admin')) {
       window.location.assign('/admin/login')
       return;
     }
@@ -56,7 +56,8 @@ export const checkAuth = async () => {
   }
 }
 
-export const getVocabulary = async (lang: string, query?: string): Promise<VocabularyType[] | undefined> => {
+// Improve this function to handle query and type parameters and pagination if needed
+export const getVocabulary = async (lang: string, query?: string, type?: string): Promise<VocabularyType[] | undefined> => {
   const queryParam = query ? `&query=${query}` : ''
   return await fetchData(
     `/vocabulary?lang=${lang}${queryParam}`,
@@ -126,10 +127,10 @@ export const uploadFile = async (formData: FormData) => {
 
 /*----------- TANSTACK QUERIES -----------------*/
 
-export const useVocabularyQuery = (langCode: string, query?: string) => {
+export const useVocabularyQuery = (langCode: string, query?: string, type?: string) => {
   return useQuery({
-    queryKey: ['vocabulary', langCode, query],
-    queryFn: () => getVocabulary(langCode, query),
+    queryKey: ['vocabulary', langCode, query, type],
+    queryFn: () => getVocabulary(langCode, query, type),
     staleTime: 1000 * 60 * 5, // 30 minutes
     retry: 1,
   });

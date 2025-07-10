@@ -1,7 +1,7 @@
 const categories: Record<'grammar' | 'language levels' | 'languages', Record<string, string>> = {
   "grammar": {
     "Cases": "19rEsNPuT9KjBZk0T4d3Oz",
-    "Nouns": "4CzbSrnYkCxEwCtMbSDocq",
+    "Articles": "4CzbSrnYkCxEwCtMbSDocq",
     "Conjunctions": "7EhLcfTZ9QGiA7OJ0fIb6A",
     "Useful phrases": "17hXpPtg0Ks7jh7LKx81zl",
     "Sentence Structure": "5QvzHuy38lMaLJiQqpofl9",
